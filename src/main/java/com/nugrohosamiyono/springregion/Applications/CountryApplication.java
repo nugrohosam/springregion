@@ -25,7 +25,6 @@ public class CountryApplication {
     }
 
     public void updateCountryFromAPI(Integer id, CountryUpdate countryUpdate) {
-
         Optional<CountryModel> countryOpt = this.countryRepository.findById(id);
 
         CountryModel updatCountry = countryOpt.get();
@@ -42,6 +41,11 @@ public class CountryApplication {
     }
 
     public CountryModel detailCountry(Integer id) {
-        return this.countryRepository.findById(id).get();
+        Optional<CountryModel> countOpt = this.countryRepository.findById(id);
+        if (countOpt.isEmpty()){
+            return (new CountryModel());
+        }
+        
+        return countOpt.get();
     }
 }

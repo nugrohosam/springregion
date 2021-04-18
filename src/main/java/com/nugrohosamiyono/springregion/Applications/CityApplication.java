@@ -20,7 +20,6 @@ public class CityApplication {
     private StateRepository stateRepository;
 
     public void createCityFromAPI(CityCreate cityCreate) {
-
         CityModel newCity = new CityModel();
         newCity.setState(this.stateRepository.findById(cityCreate.stateid).get());
         newCity.setName(cityCreate.name);
@@ -46,6 +45,11 @@ public class CityApplication {
     }
 
     public CityModel detailCity(Integer id) {
-        return this.CityRepository.findById(id).get();
+        Optional<CityModel> cityOpt = this.CityRepository.findById(id);
+        if (cityOpt.isEmpty()){
+            return (new CityModel());
+        }
+
+        return cityOpt.get();
     }
 }

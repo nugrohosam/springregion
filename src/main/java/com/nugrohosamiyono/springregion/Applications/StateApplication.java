@@ -46,6 +46,11 @@ public class StateApplication {
     }
 
     public StateModel detailState(Integer id) {
-        return this.stateRepository.findById(id).get();
+        Optional<StateModel> stateOpt = this.stateRepository.findById(id);
+        if (stateOpt.isEmpty()){
+            return (new StateModel());
+        }
+
+        return stateOpt.get();
     }
 }
