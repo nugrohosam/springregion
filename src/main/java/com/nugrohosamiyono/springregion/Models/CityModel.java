@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity // This tells Hibernate to make a table out of this class
 public class CityModel {
@@ -14,6 +15,9 @@ public class CityModel {
 
     private String name;
 
+    @ManyToOne( targetEntity=StateModel.class )
+    private StateModel state;
+ 
     public Integer getId() {
         return id;
     }
@@ -28,6 +32,14 @@ public class CityModel {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public StateModel getState() {
+        return state;
+    }
+
+    public void setState(StateModel state) {
+        this.state = state;
     }
 
 }

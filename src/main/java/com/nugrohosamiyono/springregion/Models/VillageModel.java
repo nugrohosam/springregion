@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity //
 public class VillageModel {
@@ -14,6 +15,9 @@ public class VillageModel {
 
     private String name;
 
+    @ManyToOne( targetEntity=DistrictModel.class )
+    private DistrictModel district;
+ 
     public Integer getId() {
         return id;
     }
@@ -28,5 +32,13 @@ public class VillageModel {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public DistrictModel getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(DistrictModel district) {
+        this.district = district;
     }
 }

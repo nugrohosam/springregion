@@ -1,5 +1,7 @@
 package com.nugrohosamiyono.springregion.Controllers;
 
+import com.nugrohosamiyono.springregion.Requests.Country.CountryCreate;
+import com.nugrohosamiyono.springregion.Requests.Country.CountryUpdate;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,12 +39,4 @@ public class CountryController {
     public String store(@PathVariable Integer id) {
         return "delete of country";
     }
-}
-
-class CountryCreate {
-    String name;
-}
-
-class CountryUpdate {
-    String name;
 }
