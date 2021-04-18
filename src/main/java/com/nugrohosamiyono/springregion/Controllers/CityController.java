@@ -1,9 +1,14 @@
 package com.nugrohosamiyono.springregion.Controllers;
 
 import com.nugrohosamiyono.springregion.Applications.CityApplication;
+import com.nugrohosamiyono.springregion.Helpers.Response;
+import com.nugrohosamiyono.springregion.Helpers.ResponseData;
+import com.nugrohosamiyono.springregion.Helpers.ResponseMessage;
 import com.nugrohosamiyono.springregion.Models.CityModel;
+import com.nugrohosamiyono.springregion.Requests.QueryParams;
 import com.nugrohosamiyono.springregion.Requests.City.CityCreate;
 import com.nugrohosamiyono.springregion.Requests.City.CityUpdate;
+import com.nugrohosamiyono.springregion.Responses.City.CityDetail;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,30 +28,34 @@ public class CityController {
     private CityApplication cityApplication;
 
     @GetMapping("")
-    public Iterable<CityModel> index() {
-        return this.cityApplication.getCityFromAPI();
+    public Response index(QueryParams queryParams) {
+        Iterable<CityModel> cities = this.cityApplication.getCityFromAPI();
+        return (new ResponseData(cities));
     }
 
     @GetMapping("/{id}")
-    public CityModel show(@PathVariable Integer id) {
-        return this.cityApplication.detailCity(id);
+    public Response show(@PathVariable Integer id) {
+        CityModel city = this.cityApplication.detailCity(id);
+
+        CityDetail response = new CityDetail(city);
+        return (new ResponseData(response));
     }
 
     @PutMapping("/{id}")
-    public String update(@PathVariable Integer id, @RequestBody CityUpdate cityUpdate) {
+    public Response update(@PathVariable Integer id, @RequestBody CityUpdate cityUpdate) {
         this.cityApplication.updateCityFromAPI(id, cityUpdate);
-        return "updated city";
+        return (new ResponseMessage("updated city"));
     }
 
     @PostMapping("")
-    public String store(@RequestBody CityCreate cityCreate) {
+    public Response store(@RequestBody CityCreate cityCreate) {
         this.cityApplication.createCityFromAPI(cityCreate);
-        return "stored city";
+        return (new ResponseMessage("stored city"));
     }
 
     @DeleteMapping("/{id}")
-    public String delete(@PathVariable Integer id) {
+    public Response delete(@PathVariable Integer id) {
         this.cityApplication.deleteCityFromAPI(id);
-        return "delete of city";
+        return (new ResponseMessage("delete of city"));
     }
 }

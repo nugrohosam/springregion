@@ -15,9 +15,9 @@ public class CityModel {
 
     private String name;
 
-    @ManyToOne( targetEntity=StateModel.class )
+    @ManyToOne(targetEntity = StateModel.class)
     private StateModel state;
- 
+
     public Integer getId() {
         return id;
     }
@@ -41,5 +41,4 @@ public class CityModel {
     public void setState(StateModel state) {
         this.state = state;
     }
-
 }
