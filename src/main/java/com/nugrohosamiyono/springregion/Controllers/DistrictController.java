@@ -1,7 +1,6 @@
 package com.nugrohosamiyono.springregion.Controllers;
 
 import com.nugrohosamiyono.springregion.Applications.DistrictApplication;
-import com.nugrohosamiyono.springregion.Models.CountryModel;
 import com.nugrohosamiyono.springregion.Models.DistrictModel;
 import com.nugrohosamiyono.springregion.Requests.District.DistrictCreate;
 import com.nugrohosamiyono.springregion.Requests.District.DistrictUpdate;
