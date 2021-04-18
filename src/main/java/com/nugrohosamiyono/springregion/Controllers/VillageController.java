@@ -44,7 +44,7 @@ public class VillageController {
         return "detail of village";
     }
 
-    @DeleteMapping("")
+    @DeleteMapping("/{id}")
     public String store(@PathVariable Integer id) {
         this.villageApplication.deleteVillageFromAPI(id);
         return "delete of village";

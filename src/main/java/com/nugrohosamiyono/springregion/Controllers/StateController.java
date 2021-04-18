@@ -44,7 +44,7 @@ public class StateController {
         return "detail of state";
     }
 
-    @DeleteMapping("")
+    @DeleteMapping("/{id}")
     public String delete(@PathVariable Integer id) {
         this.stateApplication.deleteStateFromAPI(id);
         return "delete of state";

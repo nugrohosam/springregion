@@ -44,7 +44,7 @@ public class CountryController {
         return "detail of country";
     }
 
-    @DeleteMapping("")
+    @DeleteMapping("/{id}")
     public String delete(@PathVariable Integer id) {
         this.countryApplication.deleteCountryFromAPI(id);
         return "delete of country";

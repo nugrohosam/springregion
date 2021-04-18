@@ -44,7 +44,7 @@ public class DistrictController {
         return "detail of district";
     }
 
-    @DeleteMapping("")
+    @DeleteMapping("/{id}")
     public String delete(@PathVariable Integer id) {
         this.districtApplication.deleteDistrictFromAPI(id);
         return "delete of district";

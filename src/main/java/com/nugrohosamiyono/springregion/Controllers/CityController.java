@@ -44,7 +44,7 @@ public class CityController {
         return "stored city";
     }
 
-    @DeleteMapping("")
+    @DeleteMapping("/{id}")
     public String delete(@PathVariable Integer id) {
         this.cityApplication.deleteCityFromAPI(id);
         return "delete of city";
