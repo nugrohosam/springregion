@@ -19,21 +19,21 @@ public class CityApplication {
     @Autowired
     private StateRepository stateRepository;
 
-    public void createCityFromAPI(CityCreate CityCreate) {
+    public void createCityFromAPI(CityCreate cityCreate) {
 
         CityModel newCity = new CityModel();
-        newCity.setState(this.stateRepository.findById(CityCreate.stateid).get());
-        newCity.setName(CityCreate.name);
+        newCity.setState(this.stateRepository.findById(cityCreate.stateid).get());
+        newCity.setName(cityCreate.name);
 
         this.CityRepository.save(newCity);
     }
 
-    public void updateCityFromAPI(Integer id, CityUpdate CityUpdate) {
+    public void updateCityFromAPI(Integer id, CityUpdate cityUpdate) {
         Optional<CityModel> CityOpt = this.CityRepository.findById(id);
 
         CityModel updatCity = CityOpt.get();
-        updatCity.setState(this.stateRepository.findById(CityUpdate.stateid).get());
-        updatCity.setName(CityUpdate.name);
+        updatCity.setState(this.stateRepository.findById(cityUpdate.stateid).get());
+        updatCity.setName(cityUpdate.name);
         this.CityRepository.save(updatCity);
     }
 

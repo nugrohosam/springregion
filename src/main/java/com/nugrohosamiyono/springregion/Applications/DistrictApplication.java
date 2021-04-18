@@ -19,21 +19,21 @@ public class DistrictApplication {
     @Autowired
     private CityRepository cityRepository;
 
-    public void createDistrictFromAPI(DistrictCreate DistrictCreate) {
+    public void createDistrictFromAPI(DistrictCreate districtCreate) {
 
         DistrictModel newDistrict = new DistrictModel();
-        newDistrict.setCity(this.cityRepository.findById(DistrictCreate.cityid).get());
-        newDistrict.setName(DistrictCreate.name);
+        newDistrict.setCity(this.cityRepository.findById(districtCreate.cityid).get());
+        newDistrict.setName(districtCreate.name);
 
         this.DistrictRepository.save(newDistrict);
     }
 
-    public void updateDistrictFromAPI(Integer id, DistrictUpdate DistrictUpdate) {
+    public void updateDistrictFromAPI(Integer id, DistrictUpdate districtUpdate) {
         Optional<DistrictModel> DistrictOpt = this.DistrictRepository.findById(id);
 
         DistrictModel updatDistrict = DistrictOpt.get();
-        updatDistrict.setCity(this.cityRepository.findById(DistrictUpdate.cityid).get());
-        updatDistrict.setName(DistrictUpdate.name);
+        updatDistrict.setCity(this.cityRepository.findById(districtUpdate.cityid).get());
+        updatDistrict.setName(districtUpdate.name);
         this.DistrictRepository.save(updatDistrict);
     }
 
