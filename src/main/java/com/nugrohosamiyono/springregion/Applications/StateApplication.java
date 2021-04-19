@@ -19,8 +19,7 @@ public class StateApplication {
     @Autowired
     private CountryRepository countryRepository;
 
-    public void createStateFromAPI(StateCreate stateCreate) {
-
+    public void createStateFromAPI(StateCreate stateCreate) throws RuntimeException {
         StateModel newState = new StateModel();
         newState.setCountry(this.countryRepository.findById(stateCreate.countryid).get());
         newState.setName(stateCreate.name);

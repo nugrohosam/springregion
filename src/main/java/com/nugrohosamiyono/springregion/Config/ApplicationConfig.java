@@ -21,7 +21,6 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 @Configuration
 public class ApplicationConfig {
-
     @Bean
     public Filter snakeConverter() {
         return new OncePerRequestFilter() {
