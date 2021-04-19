@@ -11,7 +11,6 @@ import com.nugrohosamiyono.springregion.Requests.State.StateCreate;
 import com.nugrohosamiyono.springregion.Requests.State.StateUpdate;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.bind.validation.ValidationErrors;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.DeleteMapping;
