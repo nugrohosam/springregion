@@ -1,5 +1,9 @@
 package com.nugrohosamiyono.springregion.Requests.Country;
 
+import javax.validation.constraints.NotNull;
+
 public class CountryCreate {
-    public String name;
+
+    @NotNull
+    public String name;    
 }
