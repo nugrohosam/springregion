@@ -18,6 +18,10 @@ public class CountryValidator implements ConstraintValidator<CountryShouldbeExis
 
   @Override
   public boolean isValid(Integer countryid, ConstraintValidatorContext context) {
+    if (countryid == null) {
+      return false;
+    }
+
     return this.countryApplication.detailCountry(countryid).getId() != null;
   }
 }

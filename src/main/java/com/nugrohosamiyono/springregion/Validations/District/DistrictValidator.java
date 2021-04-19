@@ -13,11 +13,15 @@ public class DistrictValidator implements ConstraintValidator<DistrictShouldbeEx
   DistrictApplication countryApplication;
 
   @Override
-  public void initialize(DistrictShouldbeExists countryid) {
+  public void initialize(DistrictShouldbeExists districtid) {
   }
 
   @Override
-  public boolean isValid(Integer countryid, ConstraintValidatorContext context) {
-    return this.countryApplication.detailDistrict(countryid).getId() != null;
+  public boolean isValid(Integer districtid, ConstraintValidatorContext context) {
+    if (districtid == null) {
+      return false;
+    }
+
+    return this.countryApplication.detailDistrict(districtid).getId() != null;
   }
 }

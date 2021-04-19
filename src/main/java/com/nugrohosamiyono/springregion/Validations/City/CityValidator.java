@@ -13,11 +13,14 @@ public class CityValidator implements ConstraintValidator<CityShouldbeExists, In
   CityApplication countryApplication;
 
   @Override
-  public void initialize(CityShouldbeExists countryid) {
+  public void initialize(CityShouldbeExists cityid) {
   }
 
   @Override
-  public boolean isValid(Integer countryid, ConstraintValidatorContext context) {
-    return this.countryApplication.detailCity(countryid).getId() != null;
+  public boolean isValid(Integer cityid, ConstraintValidatorContext context) {
+    if (cityid == null) {
+      return false;
+    }
+    return this.countryApplication.detailCity(cityid).getId() != null;
   }
 }

@@ -13,11 +13,15 @@ public class StateValidator implements ConstraintValidator<StateShouldbeExists, 
   StateApplication countryApplication;
 
   @Override
-  public void initialize(StateShouldbeExists countryid) {
+  public void initialize(StateShouldbeExists stateid) {
   }
 
   @Override
-  public boolean isValid(Integer countryid, ConstraintValidatorContext context) {
-    return this.countryApplication.detailState(countryid).getId() != null;
+  public boolean isValid(Integer stateid, ConstraintValidatorContext context) {
+    if (stateid == null){
+      return false;
+    }
+
+    return this.countryApplication.detailState(stateid).getId() != null;
   }
 }
