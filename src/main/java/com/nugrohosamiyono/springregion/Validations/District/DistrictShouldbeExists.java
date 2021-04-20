@@ -9,12 +9,40 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
+import javax.validation.ConstraintValidator;
+import javax.validation.ConstraintValidatorContext;
+
+import com.nugrohosamiyono.springregion.Applications.DistrictApplication;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
 @Documented
-@Constraint(validatedBy = DistrictValidator.class)
+@Constraint(validatedBy = DistrictValidatorShouldBeExists.class)
 @Target({ ElementType.METHOD, ElementType.FIELD })
 @Retention(RetentionPolicy.RUNTIME)
-public @interface DistrictShouldbeExists {
+public @interface DistrictShouldBeExists {
     String message() default "Cannot Find District";
+
     Class<?>[] groups() default {};
+
     Class<? extends Payload>[] payload() default {};
+}
+
+class DistrictValidatorShouldBeExists implements ConstraintValidator<DistrictShouldBeExists, Integer> {
+
+    @Autowired
+    DistrictApplication countryApplication;
+
+    @Override
+    public void initialize(DistrictShouldBeExists districtid) {
+    }
+
+    @Override
+    public boolean isValid(Integer districtid, ConstraintValidatorContext context) {
+        if (districtid == null) {
+            return false;
+        }
+
+        return this.countryApplication.detailDistrict(districtid).getId() != null;
+    }
 }
