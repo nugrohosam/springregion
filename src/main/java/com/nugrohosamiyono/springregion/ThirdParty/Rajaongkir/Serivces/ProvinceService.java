@@ -48,7 +48,7 @@ public class ProvinceService {
     }
 
     public RajaOngkir detailProvince(int id) throws JsonParseException, IOException, InterruptedException {
-        String endpoint = this.url + "/" + this.level + "/province";
+        String endpoint = this.url + "/" + this.level + "/province=id" + id;
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder().uri(URI.create(endpoint)).build();
 
