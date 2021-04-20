@@ -1,13 +1,18 @@
 package com.nugrohosamiyono.springregion.Controllers;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import com.nugrohosamiyono.springregion.Applications.CountryApplication;
 import com.nugrohosamiyono.springregion.Exceptions.ValidationException;
 import com.nugrohosamiyono.springregion.Helpers.Base;
+import com.nugrohosamiyono.springregion.Helpers.Response;
 import com.nugrohosamiyono.springregion.Models.CountryModel;
 import com.nugrohosamiyono.springregion.Requests.Country.CountryCreate;
 import com.nugrohosamiyono.springregion.Requests.Country.CountryUpdate;
+import com.nugrohosamiyono.springregion.Responses.Country.CountryDetail;
+import com.nugrohosamiyono.springregion.Responses.Country.CountryItem;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
@@ -28,33 +33,37 @@ public class CountryController {
     private CountryApplication countryApplication;
 
     @GetMapping("")
-    public Iterable<CountryModel> index() {
-        return this.countryApplication.getCountryFromAPI();
+    public Response index() {
+        Iterable<CountryModel> countries = this.countryApplication.getCountryFromAPI();
+        List<Object> countriesResponse = CountryItem.toMap(countries);
+        return Base.responseList(countriesResponse);
     }
 
     @GetMapping("/{id}")
-    public CountryModel show(@PathVariable Integer id) {
-        return this.countryApplication.detailCountry(id);
+    public Response show(@PathVariable Integer id) {
+        CountryModel country = this.countryApplication.detailCountry(id);
+        CountryDetail countryDetail = new CountryDetail(country);
+        return Base.responseData(countryDetail);
     }
 
     @PutMapping("/{id}")
-    public String update(@PathVariable Integer id, @Valid @RequestBody CountryUpdate countryUpdate, Errors errors)
+    public Response update(@PathVariable Integer id, @Valid @RequestBody CountryUpdate countryUpdate, Errors errors)
             throws ValidationException {
         Base.validationCheck(errors);
         this.countryApplication.updateCountryFromAPI(id, countryUpdate);
-        return "detail of country";
+        return Base.responseMessage("success update country");
     }
 
     @PostMapping("")
-    public String store(@Valid @RequestBody CountryCreate countryCreate, Errors errors) throws ValidationException {
+    public Response store(@Valid @RequestBody CountryCreate countryCreate, Errors errors) throws ValidationException {
         Base.validationCheck(errors);
         this.countryApplication.createCountryFromAPI(countryCreate);
-        return "detail of country";
+        return Base.responseMessage("success update country");
     }
 
     @DeleteMapping("/{id}")
-    public String delete(@PathVariable Integer id) {
+    public Response delete(@PathVariable Integer id) {
         this.countryApplication.deleteCountryFromAPI(id);
-        return "delete of country";
+        return Base.responseMessage("delete update country");
     }
 }
