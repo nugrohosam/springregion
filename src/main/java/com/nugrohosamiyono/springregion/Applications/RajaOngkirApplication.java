@@ -19,5 +19,4 @@ public class RajaOngkirApplication {
     public void detailProvince(int id) throws Exception {
         provinceServie.detailProvince(id);
     }
-
 }
