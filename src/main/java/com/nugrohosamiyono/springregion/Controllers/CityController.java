@@ -1,6 +1,10 @@
 package com.nugrohosamiyono.springregion.Controllers;
 
+import javax.validation.Valid;
+
 import com.nugrohosamiyono.springregion.Applications.CityApplication;
+import com.nugrohosamiyono.springregion.Exceptions.ValidationException;
+import com.nugrohosamiyono.springregion.Helpers.Base;
 import com.nugrohosamiyono.springregion.Helpers.Response;
 import com.nugrohosamiyono.springregion.Helpers.ResponseData;
 import com.nugrohosamiyono.springregion.Helpers.ResponseMessage;
@@ -11,6 +15,7 @@ import com.nugrohosamiyono.springregion.Requests.City.CityUpdate;
 import com.nugrohosamiyono.springregion.Responses.City.CityDetail;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,13 +47,18 @@ public class CityController {
     }
 
     @PutMapping("/{id}")
-    public Response update(@PathVariable Integer id, @RequestBody CityUpdate cityUpdate) {
+    public Response update(@PathVariable Integer id, @Valid @RequestBody CityUpdate cityUpdate, Errors errors)
+            throws ValidationException {
+        Base.validationCheck(errors);
+
         this.cityApplication.updateCityFromAPI(id, cityUpdate);
         return (new ResponseMessage("updated city"));
     }
 
     @PostMapping("")
-    public Response store(@RequestBody CityCreate cityCreate) {
+    public Response store(@Valid @RequestBody CityCreate cityCreate, Errors errors) throws ValidationException {
+        Base.validationCheck(errors);
+
         this.cityApplication.createCityFromAPI(cityCreate);
         return (new ResponseMessage("stored city"));
     }

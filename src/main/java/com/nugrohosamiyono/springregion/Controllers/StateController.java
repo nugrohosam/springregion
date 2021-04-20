@@ -30,9 +30,6 @@ public class StateController {
     @Autowired
     private StateApplication stateApplication;
 
-    @Autowired
-    private RajaOngkirApplication rajaOngkirApplication;
-
     @GetMapping("")
     public Iterable<StateModel> index() {
         return this.stateApplication.getStateFromAPI();
@@ -41,11 +38,6 @@ public class StateController {
     @GetMapping("/{id}")
     public StateModel show(@PathVariable Integer id) {
         return this.stateApplication.detailState(id);
-    }
-
-    @GetMapping("/raja-ongkir")
-    public Object indexRajaOngkir() throws Exception {
-        return this.rajaOngkirApplication.getProvince();
     }
 
     @PutMapping("/{id}")

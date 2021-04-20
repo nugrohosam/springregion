@@ -1,11 +1,16 @@
 package com.nugrohosamiyono.springregion.Controllers;
 
+import javax.validation.Valid;
+
 import com.nugrohosamiyono.springregion.Applications.VillageApplication;
+import com.nugrohosamiyono.springregion.Exceptions.ValidationException;
+import com.nugrohosamiyono.springregion.Helpers.Base;
 import com.nugrohosamiyono.springregion.Models.VillageModel;
 import com.nugrohosamiyono.springregion.Requests.Village.VillageCreate;
 import com.nugrohosamiyono.springregion.Requests.Village.VillageUpdate;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,13 +38,16 @@ public class VillageController {
     }
 
     @PutMapping("/{id}")
-    public String update(@PathVariable Integer id, @RequestBody VillageUpdate villageUpdate) {
+    public String update(@PathVariable Integer id, @Valid @RequestBody VillageUpdate villageUpdate, Errors errors)
+            throws ValidationException {
+        Base.validationCheck(errors);
         this.villageApplication.updateVillageFromAPI(id, villageUpdate);
         return "detail of village";
     }
 
     @PostMapping("")
-    public String store(@RequestBody VillageCreate villageCreate) {
+    public String store(@Valid @RequestBody VillageCreate villageCreate, Errors errors) throws ValidationException {
+        Base.validationCheck(errors);
         this.villageApplication.createVillageFromAPI(villageCreate);
         return "detail of village";
     }

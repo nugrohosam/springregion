@@ -1,11 +1,16 @@
 package com.nugrohosamiyono.springregion.Controllers;
 
+import javax.validation.Valid;
+
 import com.nugrohosamiyono.springregion.Applications.DistrictApplication;
+import com.nugrohosamiyono.springregion.Exceptions.ValidationException;
+import com.nugrohosamiyono.springregion.Helpers.Base;
 import com.nugrohosamiyono.springregion.Models.DistrictModel;
 import com.nugrohosamiyono.springregion.Requests.District.DistrictCreate;
 import com.nugrohosamiyono.springregion.Requests.District.DistrictUpdate;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,13 +38,16 @@ public class DistrictController {
     }
 
     @PutMapping("/{id}")
-    public String update(@PathVariable Integer id, @RequestBody DistrictUpdate districtUpdate) {
+    public String update(@PathVariable Integer id, @Valid @RequestBody DistrictUpdate districtUpdate, Errors errors)
+            throws ValidationException {
+        Base.validationCheck(errors);
         this.districtApplication.updateDistrictFromAPI(id, districtUpdate);
         return "detail of district";
     }
 
     @PostMapping("")
-    public String store(@RequestBody DistrictCreate districtCreate) {
+    public String store(@Valid @RequestBody DistrictCreate districtCreate, Errors errors) throws ValidationException {
+        Base.validationCheck(errors);
         this.districtApplication.createDistrictFromAPI(districtCreate);
         return "detail of district";
     }
