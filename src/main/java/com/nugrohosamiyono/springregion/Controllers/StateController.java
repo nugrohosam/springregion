@@ -1,15 +1,18 @@
 package com.nugrohosamiyono.springregion.Controllers;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import com.nugrohosamiyono.springregion.Applications.StateApplication;
 import com.nugrohosamiyono.springregion.Exceptions.ValidationException;
 import com.nugrohosamiyono.springregion.Helpers.Base;
 import com.nugrohosamiyono.springregion.Helpers.Response;
-import com.nugrohosamiyono.springregion.Helpers.ResponseMessage;
 import com.nugrohosamiyono.springregion.Models.StateModel;
 import com.nugrohosamiyono.springregion.Requests.State.StateCreate;
 import com.nugrohosamiyono.springregion.Requests.State.StateUpdate;
+import com.nugrohosamiyono.springregion.Responses.State.StateDetail;
+import com.nugrohosamiyono.springregion.Responses.State.StateItem;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
@@ -30,13 +33,17 @@ public class StateController {
     private StateApplication stateApplication;
 
     @GetMapping("")
-    public Iterable<StateModel> index() {
-        return this.stateApplication.getStateFromAPI();
+    public Response index() {
+        Iterable<StateModel> states = this.stateApplication.getStateFromAPI();
+        List<Object> statesResponse = StateItem.toMap(states);
+        return Base.responseList(statesResponse);
     }
 
     @GetMapping("/{id}")
-    public StateModel show(@PathVariable Integer id) {
-        return this.stateApplication.detailState(id);
+    public Response show(@PathVariable Integer id) {
+        StateModel state = this.stateApplication.detailState(id);
+        StateDetail stateDetail = new StateDetail(state);
+        return Base.responseData(stateDetail);
     }
 
     @PutMapping("/{id}")
@@ -45,7 +52,7 @@ public class StateController {
         Base.validationCheck(errors);
 
         this.stateApplication.updateStateFromAPI(id, stateUpdate);
-        return (new ResponseMessage("Success create"));
+        return Base.responseMessage("updated of state");
     }
 
     @PostMapping("")
@@ -53,12 +60,12 @@ public class StateController {
         Base.validationCheck(errors);
 
         this.stateApplication.createStateFromAPI(stateCreate);
-        return (new ResponseMessage("Success create"));
+        return Base.responseMessage("stored state");
     }
 
     @DeleteMapping("/{id}")
-    public String delete(@PathVariable Integer id) {
+    public Response delete(@PathVariable Integer id) {
         this.stateApplication.deleteStateFromAPI(id);
-        return "delete of state";
+        return Base.responseMessage("delete of state");
     }
 }

@@ -1,13 +1,18 @@
 package com.nugrohosamiyono.springregion.Controllers;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import com.nugrohosamiyono.springregion.Applications.VillageApplication;
 import com.nugrohosamiyono.springregion.Exceptions.ValidationException;
 import com.nugrohosamiyono.springregion.Helpers.Base;
+import com.nugrohosamiyono.springregion.Helpers.Response;
 import com.nugrohosamiyono.springregion.Models.VillageModel;
 import com.nugrohosamiyono.springregion.Requests.Village.VillageCreate;
 import com.nugrohosamiyono.springregion.Requests.Village.VillageUpdate;
+import com.nugrohosamiyono.springregion.Responses.Village.VillageDetail;
+import com.nugrohosamiyono.springregion.Responses.Village.VillageItem;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
@@ -28,33 +33,37 @@ public class VillageController {
     private VillageApplication villageApplication;
 
     @GetMapping("")
-    public Iterable<VillageModel> index() {
-        return this.villageApplication.getVillageFromAPI();
+    public Response index() {
+        Iterable<VillageModel> villages = this.villageApplication.getVillageFromAPI();
+        List<Object> villagesItems = VillageItem.toMap(villages);
+        return Base.responseList(villagesItems);
     }
 
     @GetMapping("/{id}")
-    public VillageModel show(@PathVariable Integer id) {
-        return this.villageApplication.detailVillage(id);
+    public Response show(@PathVariable Integer id) {
+        VillageModel village = this.villageApplication.detailVillage(id);
+        VillageDetail villageDetail = new VillageDetail(village);
+        return Base.responseData(villageDetail);
     }
 
     @PutMapping("/{id}")
-    public String update(@PathVariable Integer id, @Valid @RequestBody VillageUpdate villageUpdate, Errors errors)
+    public Response update(@PathVariable Integer id, @Valid @RequestBody VillageUpdate villageUpdate, Errors errors)
             throws ValidationException {
         Base.validationCheck(errors);
         this.villageApplication.updateVillageFromAPI(id, villageUpdate);
-        return "detail of village";
+        return Base.responseMessage("updated of village");
     }
 
     @PostMapping("")
-    public String store(@Valid @RequestBody VillageCreate villageCreate, Errors errors) throws ValidationException {
+    public Response store(@Valid @RequestBody VillageCreate villageCreate, Errors errors) throws ValidationException {
         Base.validationCheck(errors);
         this.villageApplication.createVillageFromAPI(villageCreate);
-        return "detail of village";
+        return Base.responseMessage("stored of village");
     }
 
     @DeleteMapping("/{id}")
-    public String store(@PathVariable Integer id) {
+    public Response delete(@PathVariable Integer id) {
         this.villageApplication.deleteVillageFromAPI(id);
-        return "delete of village";
+        return Base.responseMessage("deleted of village");
     }
 }

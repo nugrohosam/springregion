@@ -12,10 +12,10 @@ public class DistrictDetail {
     public CityItem city;
     public String name;
 
-    public DistrictDetail(DistrictModel stateModel) {
-        this.id = stateModel.getId();
-        this.cityid = stateModel.getCity().getId();
-        this.name = stateModel.getName();
-        this.city = (new CityItem(stateModel.getCity()));
+    public DistrictDetail(DistrictModel districtModel) {
+        this.id = districtModel.getId();
+        this.cityid = districtModel.getCity().getId();
+        this.name = districtModel.getName();
+        this.city = (new CityItem(districtModel.getCity()));
     }
 }
