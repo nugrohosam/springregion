@@ -30,7 +30,7 @@ out/
 /nbproject/private/
 /nbbuild/
 /dist/
-/main/resources/application.properties
+/src/main/resources/application.properties
 /nbdist/
 /.nb-gradle/
 
