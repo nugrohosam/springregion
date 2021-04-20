@@ -25,4 +25,20 @@ public class Base {
             throw new ValidationException(objecteErrors);
         }
     }
+
+    public static Response responseError(String message) {
+        return (new ResponseError(message));
+    }
+
+    public static Response responseMessage(String message) {
+        return (new ResponseMessage(message));
+    }
+
+    public static Response responseData(Object data) {
+        return (new ResponseData(data));
+    }
+
+    public static Response responseList(List<Object> data) {
+        return (new ResponseItems(data));
+    }
 }

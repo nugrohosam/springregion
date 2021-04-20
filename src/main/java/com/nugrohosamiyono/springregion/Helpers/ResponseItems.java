@@ -1,11 +1,11 @@
 package com.nugrohosamiyono.springregion.Helpers;
 
-import java.util.Iterator;
+import java.util.List;
 
 public class ResponseItems extends Response {    
-    public Iterator<Object> items;
+    public List<Object> items;
 
-    public ResponseItems(Iterator<Object> items) {
+    public ResponseItems(List<Object> items) {
         this.items = items;
         this.status_code = 200;
     }

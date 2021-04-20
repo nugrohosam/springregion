@@ -1,18 +1,20 @@
 package com.nugrohosamiyono.springregion.Controllers;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import com.nugrohosamiyono.springregion.Applications.CityApplication;
 import com.nugrohosamiyono.springregion.Exceptions.ValidationException;
 import com.nugrohosamiyono.springregion.Helpers.Base;
 import com.nugrohosamiyono.springregion.Helpers.Response;
-import com.nugrohosamiyono.springregion.Helpers.ResponseData;
 import com.nugrohosamiyono.springregion.Helpers.ResponseMessage;
 import com.nugrohosamiyono.springregion.Models.CityModel;
 import com.nugrohosamiyono.springregion.Requests.QueryParams;
 import com.nugrohosamiyono.springregion.Requests.City.CityCreate;
 import com.nugrohosamiyono.springregion.Requests.City.CityUpdate;
 import com.nugrohosamiyono.springregion.Responses.City.CityDetail;
+import com.nugrohosamiyono.springregion.Responses.City.CityItem;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
@@ -35,15 +37,15 @@ public class CityController {
     @GetMapping("")
     public Response index(QueryParams queryParams) {
         Iterable<CityModel> cities = this.cityApplication.getCityFromAPI();
-        return (new ResponseData(cities));
+        List<Object> response = CityItem.toMap(cities);
+        return Base.responseList(response);
     }
 
     @GetMapping("/{id}")
     public Response show(@PathVariable Integer id) {
         CityModel city = this.cityApplication.detailCity(id);
-
         CityDetail response = new CityDetail(city);
-        return (new ResponseData(response));
+        return Base.responseData(response);
     }
 
     @PutMapping("/{id}")
@@ -52,7 +54,7 @@ public class CityController {
         Base.validationCheck(errors);
 
         this.cityApplication.updateCityFromAPI(id, cityUpdate);
-        return (new ResponseMessage("updated city"));
+        return Base.responseMessage("updated city");
     }
 
     @PostMapping("")
@@ -60,7 +62,7 @@ public class CityController {
         Base.validationCheck(errors);
 
         this.cityApplication.createCityFromAPI(cityCreate);
-        return (new ResponseMessage("stored city"));
+        return Base.responseMessage("stored city");
     }
 
     @DeleteMapping("/{id}")
