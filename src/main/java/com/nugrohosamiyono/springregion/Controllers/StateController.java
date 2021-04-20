@@ -2,7 +2,6 @@ package com.nugrohosamiyono.springregion.Controllers;
 
 import javax.validation.Valid;
 
-import com.nugrohosamiyono.springregion.Applications.RajaOngkirApplication;
 import com.nugrohosamiyono.springregion.Applications.StateApplication;
 import com.nugrohosamiyono.springregion.Exceptions.ValidationException;
 import com.nugrohosamiyono.springregion.Helpers.Base;
