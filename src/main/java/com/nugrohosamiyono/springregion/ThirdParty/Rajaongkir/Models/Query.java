@@ -4,6 +4,6 @@ import com.google.gson.JsonObject;
 
 public class Query {
     public Query(JsonObject object) {
-
+        // ToDo
     }
 }

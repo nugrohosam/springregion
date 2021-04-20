@@ -17,13 +17,14 @@ public class RajaOngkir {
 
     public RajaOngkir(JsonObject mapObject) {
         this.status = (new Status(mapObject.getAsJsonObject("status")));
-        this.query = new ArrayList<>();
-
-        JsonArray queryArray = mapObject.getAsJsonArray("query");
-        Iterator<JsonElement> itreate = queryArray.iterator();
-        while (itreate.hasNext()) {
-            JsonObject queryJson = itreate.next().getAsJsonObject();
-            this.query.add(new Query(queryJson));
+        if (mapObject.isJsonArray()) {
+            this.query = new ArrayList<>();
+            JsonArray queryArray = mapObject.getAsJsonArray("query");
+            Iterator<JsonElement> itreate = queryArray.iterator();
+            while (itreate.hasNext()) {
+                JsonObject queryJson = itreate.next().getAsJsonObject();
+                this.query.add(new Query(queryJson));
+            }
         }
     }
 }

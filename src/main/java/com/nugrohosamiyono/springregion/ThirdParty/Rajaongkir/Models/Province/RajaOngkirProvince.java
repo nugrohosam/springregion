@@ -16,8 +16,8 @@ public class RajaOngkirProvince {
     }
 
     public RajaOngkirProvince(JsonObject data) {
-        this.provinceId = data.get("province_id").toString();
-        this.province = data.get("province").toString();
+        this.provinceId = data.get("province_id").getAsString();
+        this.province = data.get("province").getAsString();
     }
 
     public static List<RajaOngkirProvince> toMap(JsonArray listDataJson) {
