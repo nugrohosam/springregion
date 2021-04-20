@@ -4,6 +4,7 @@ import javax.validation.Valid;
 
 import com.nugrohosamiyono.springregion.Applications.RajaOngkirApplication;
 import com.nugrohosamiyono.springregion.Applications.StateApplication;
+import com.nugrohosamiyono.springregion.Exceptions.ValidationException;
 import com.nugrohosamiyono.springregion.Helpers.Response;
 import com.nugrohosamiyono.springregion.Helpers.ResponseMessage;
 import com.nugrohosamiyono.springregion.Helpers.ResponseValidation;
@@ -12,6 +13,7 @@ import com.nugrohosamiyono.springregion.Requests.State.StateCreate;
 import com.nugrohosamiyono.springregion.Requests.State.StateUpdate;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.bind.validation.ValidationErrors;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -52,17 +54,22 @@ public class StateController {
     }
 
     @PutMapping("/{id}")
-    public String update(@PathVariable Integer id, @RequestBody StateUpdate stateUpdate) {
+    public Response update(@PathVariable Integer id, @Valid @RequestBody StateUpdate stateUpdate, Errors errors)
+            throws ValidationException {
+        if (errors.hasErrors()) {
+            List<FieldError> objecteErrors = errors.getFieldErrors();
+            throw new ValidationException(objecteErrors);
+        }
+
         this.stateApplication.updateStateFromAPI(id, stateUpdate);
-        return "detail of state";
+        return (new ResponseMessage("Success create"));
     }
 
     @PostMapping("")
-    public Response store(@Valid @RequestBody StateCreate stateCreate, Errors errors) {
-
+    public Response store(@Valid @RequestBody StateCreate stateCreate, Errors errors) throws ValidationException {
         if (errors.hasErrors()) {
             List<FieldError> objecteErrors = errors.getFieldErrors();
-            return (new ResponseValidation(objecteErrors));
+            throw new ValidationException(objecteErrors);
         }
 
         this.stateApplication.createStateFromAPI(stateCreate);
