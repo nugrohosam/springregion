@@ -2,6 +2,7 @@ package com.nugrohosamiyono.springregion.Controllers;
 
 import javax.validation.Valid;
 
+import com.nugrohosamiyono.springregion.Applications.RajaOngkirApplication;
 import com.nugrohosamiyono.springregion.Applications.StateApplication;
 import com.nugrohosamiyono.springregion.Helpers.Response;
 import com.nugrohosamiyono.springregion.Helpers.ResponseMessage;
@@ -31,6 +32,9 @@ public class StateController {
     @Autowired
     private StateApplication stateApplication;
 
+    @Autowired
+    private RajaOngkirApplication rajaOngkirApplication;
+
     @GetMapping("")
     public Iterable<StateModel> index() {
         return this.stateApplication.getStateFromAPI();
@@ -39,6 +43,12 @@ public class StateController {
     @GetMapping("/{id}")
     public StateModel show(@PathVariable Integer id) {
         return this.stateApplication.detailState(id);
+    }
+
+    @GetMapping("/raja-ongkir")
+    public StateModel indexRajaOngkir() throws Exception {
+        this.rajaOngkirApplication.getProvince();
+        return (new StateModel());
     }
 
     @PutMapping("/{id}")

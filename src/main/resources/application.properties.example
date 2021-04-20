@@ -6,3 +6,6 @@ spring.datasource.username=root
 spring.datasource.password=root
 sentry.dsn=https://ad6c807e45e6452e90f304201c09021b@o245224.ingest.sentry.io/5724470
 spring.jackson.property-naming-strategy=SNAKE_CASE
+rajaogkir.api-key=
+rajaogkir.url=https://api.rajaongkir.com
+rajaogkir.level=starter
