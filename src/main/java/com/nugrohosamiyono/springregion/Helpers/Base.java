@@ -1,6 +1,12 @@
 package com.nugrohosamiyono.springregion.Helpers;
 
+import java.util.List;
+
+import com.nugrohosamiyono.springregion.Exceptions.ValidationException;
+
 import org.springframework.stereotype.Component;
+import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
 
 @Component
 public class Base {
@@ -11,5 +17,12 @@ public class Base {
         }
 
         return str;
+    }
+
+    public static void validationCheck(Errors errors) throws ValidationException {
+        if (errors.hasErrors()) {
+            List<FieldError> objecteErrors = errors.getFieldErrors();
+            throw new ValidationException(objecteErrors);
+        }
     }
 }

@@ -12,7 +12,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 @ControllerAdvice
 public class HandlerException extends ResponseEntityExceptionHandler {
-
+    
     @ExceptionHandler(ValidationException.class)
     public ResponseEntity<Object> handleExceptions(ValidationException exception, WebRequest webRequest) {
         ResponseValidation responseError = new ResponseValidation(exception.validationErrors);
@@ -29,7 +29,7 @@ public class HandlerException extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<Object> handleExceptions(RuntimeException exception, WebRequest webRequest) {
-        ResponseError responseError = new ResponseError(exception.getMessage());
+        ResponseError responseError = new ResponseError("Internal Server Error");
         ResponseEntity<Object> response = new ResponseEntity<>(responseError, HttpStatus.INTERNAL_SERVER_ERROR);
         return response;
     }

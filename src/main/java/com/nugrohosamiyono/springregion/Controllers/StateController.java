@@ -5,6 +5,7 @@ import javax.validation.Valid;
 import com.nugrohosamiyono.springregion.Applications.RajaOngkirApplication;
 import com.nugrohosamiyono.springregion.Applications.StateApplication;
 import com.nugrohosamiyono.springregion.Exceptions.ValidationException;
+import com.nugrohosamiyono.springregion.Helpers.Base;
 import com.nugrohosamiyono.springregion.Helpers.Response;
 import com.nugrohosamiyono.springregion.Helpers.ResponseMessage;
 import com.nugrohosamiyono.springregion.Models.StateModel;
@@ -13,7 +14,6 @@ import com.nugrohosamiyono.springregion.Requests.State.StateUpdate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -53,11 +53,7 @@ public class StateController {
     @PutMapping("/{id}")
     public Response update(@PathVariable Integer id, @Valid @RequestBody StateUpdate stateUpdate, Errors errors)
             throws ValidationException {
-
-        if (errors.hasErrors()) {
-            List<FieldError> objecteErrors = errors.getFieldErrors();
-            throw new ValidationException(objecteErrors);
-        }
+        Base.validationCheck(errors);
 
         this.stateApplication.updateStateFromAPI(id, stateUpdate);
         return (new ResponseMessage("Success create"));
@@ -65,10 +61,7 @@ public class StateController {
 
     @PostMapping("")
     public Response store(@Valid @RequestBody StateCreate stateCreate, Errors errors) throws ValidationException {
-        if (errors.hasErrors()) {
-            List<FieldError> objecteErrors = errors.getFieldErrors();
-            throw new ValidationException(objecteErrors);
-        }
+        Base.validationCheck(errors);
 
         this.stateApplication.createStateFromAPI(stateCreate);
         return (new ResponseMessage("Success create"));
