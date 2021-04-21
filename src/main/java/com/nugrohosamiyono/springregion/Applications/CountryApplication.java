@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import com.nugrohosamiyono.springregion.Models.CountryModel;
 import com.nugrohosamiyono.springregion.Repositories.CountryRepository;
+import com.nugrohosamiyono.springregion.Requests.QueryParams;
 import com.nugrohosamiyono.springregion.Requests.Country.CountryCreate;
 import com.nugrohosamiyono.springregion.Requests.Country.CountryUpdate;
 
@@ -36,8 +37,9 @@ public class CountryApplication {
         this.countryRepository.deleteById(id);
     }
 
-    public Iterable<CountryModel> getCountryFromAPI() {
-        return this.countryRepository.findAll();
+    public Iterable<CountryModel> getCountryFromAPI(QueryParams queryParams) {
+        int offset = (queryParams.getPage() - 1) * queryParams.getPage();
+        return this.countryRepository.findAllLimitOffsetByCustomQuery(queryParams.getSearch(), offset, queryParams.getPerPage());
     }
 
     public CountryModel detailCountry(Integer id) {

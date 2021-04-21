@@ -5,6 +5,7 @@ import java.util.Optional;
 import com.nugrohosamiyono.springregion.Models.StateModel;
 import com.nugrohosamiyono.springregion.Repositories.CountryRepository;
 import com.nugrohosamiyono.springregion.Repositories.StateRepository;
+import com.nugrohosamiyono.springregion.Requests.QueryParams;
 import com.nugrohosamiyono.springregion.Requests.State.StateCreate;
 import com.nugrohosamiyono.springregion.Requests.State.StateUpdate;
 
@@ -40,8 +41,10 @@ public class StateApplication {
         this.stateRepository.deleteById(id);
     }
 
-    public Iterable<StateModel> getStateFromAPI() {
-        return this.stateRepository.findAll();
+    public Iterable<StateModel> getStateFromAPI(QueryParams queryParams) {
+        int offset = (queryParams.getPage() - 1) * queryParams.getPage();
+        return this.stateRepository.findAllLimitOffsetByCustomQuery(queryParams.getSearch(), offset,
+                queryParams.getPerPage());
     }
 
     public StateModel detailState(Integer id) {

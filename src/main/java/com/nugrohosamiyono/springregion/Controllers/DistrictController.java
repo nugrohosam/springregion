@@ -9,11 +9,14 @@ import com.nugrohosamiyono.springregion.Exceptions.ValidationException;
 import com.nugrohosamiyono.springregion.Helpers.Base;
 import com.nugrohosamiyono.springregion.Helpers.Response;
 import com.nugrohosamiyono.springregion.Models.DistrictModel;
+import com.nugrohosamiyono.springregion.Requests.QueryParams;
 import com.nugrohosamiyono.springregion.Requests.District.DistrictCreate;
 import com.nugrohosamiyono.springregion.Requests.District.DistrictUpdate;
+import com.nugrohosamiyono.springregion.Responses.Pagination;
 import com.nugrohosamiyono.springregion.Responses.District.DistrictDetail;
 import com.nugrohosamiyono.springregion.Responses.District.DistrictItem;
 
+import org.apache.commons.collections4.IterableUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -33,10 +36,18 @@ public class DistrictController {
     private DistrictApplication districtApplication;
 
     @GetMapping("")
-    public Response index() {
-        Iterable<DistrictModel> districts = this.districtApplication.getDistrictFromAPI();
-        List<Object> districtResponse = DistrictItem.toMap(districts);
-        return Base.responseList(districtResponse);
+    public Response index(QueryParams queryParams) {
+        Iterable<DistrictModel> districts;
+
+        districts = this.districtApplication.getDistrictFromAPI(queryParams);
+        List<Object> response = DistrictItem.toMap(districts);
+        if (!queryParams.isPagination()) {
+            return Base.responseList(response);
+        }
+
+        int total = IterableUtils.size(districts);
+        Pagination pagination = new Pagination(queryParams.getPage(), queryParams.getPerPage(), total);
+        return Base.responsePagination(response, pagination);
     }
 
     @GetMapping("/{id}")

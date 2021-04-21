@@ -1,10 +1,21 @@
 package com.nugrohosamiyono.springregion.Helpers;
 
-public class ResponsePagination extends Response {    
-    public Object data;
+import java.util.List;
 
-    public ResponsePagination(Object data) {
-        this.data =data;
+import com.nugrohosamiyono.springregion.Responses.Pagination;
+
+public class ResponsePagination extends Response {
+    
+    public List<Object> items;
+    public int page;
+    public int perPage;
+    public int total;
+
+    public ResponsePagination(List<Object> items, Pagination pagination) {
+        this.items = items;
+        this.total = pagination.total;
+        this.perPage = pagination.perPage;
+        this.page = pagination.page;
         this.status_code = 200;
     }
 }

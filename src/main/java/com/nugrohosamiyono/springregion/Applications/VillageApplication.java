@@ -5,6 +5,7 @@ import java.util.Optional;
 import com.nugrohosamiyono.springregion.Models.VillageModel;
 import com.nugrohosamiyono.springregion.Repositories.DistrictRepository;
 import com.nugrohosamiyono.springregion.Repositories.VillageRepository;
+import com.nugrohosamiyono.springregion.Requests.QueryParams;
 import com.nugrohosamiyono.springregion.Requests.Village.VillageCreate;
 import com.nugrohosamiyono.springregion.Requests.Village.VillageUpdate;
 
@@ -41,8 +42,10 @@ public class VillageApplication {
         this.villageRepository.deleteById(id);
     }
 
-    public Iterable<VillageModel> getVillageFromAPI() {
-        return this.villageRepository.findAll();
+    public Iterable<VillageModel> getVillageFromAPI(QueryParams queryParams) {
+        int offset = (queryParams.getPage() - 1) * queryParams.getPage();
+        return this.villageRepository.findAllLimitOffsetByCustomQuery(queryParams.getSearch(), offset,
+                queryParams.getPerPage());
     }
 
     public VillageModel detailVillage(Integer id) {
@@ -50,7 +53,7 @@ public class VillageApplication {
         if (villageOpt.isEmpty()) {
             return (new VillageModel());
         }
-        
+
         return villageOpt.get();
     }
 }

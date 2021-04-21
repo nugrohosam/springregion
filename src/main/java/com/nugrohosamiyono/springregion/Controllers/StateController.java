@@ -9,11 +9,14 @@ import com.nugrohosamiyono.springregion.Exceptions.ValidationException;
 import com.nugrohosamiyono.springregion.Helpers.Base;
 import com.nugrohosamiyono.springregion.Helpers.Response;
 import com.nugrohosamiyono.springregion.Models.StateModel;
+import com.nugrohosamiyono.springregion.Requests.QueryParams;
 import com.nugrohosamiyono.springregion.Requests.State.StateCreate;
 import com.nugrohosamiyono.springregion.Requests.State.StateUpdate;
+import com.nugrohosamiyono.springregion.Responses.Pagination;
 import com.nugrohosamiyono.springregion.Responses.State.StateDetail;
 import com.nugrohosamiyono.springregion.Responses.State.StateItem;
 
+import org.apache.commons.collections4.IterableUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -33,10 +36,18 @@ public class StateController {
     private StateApplication stateApplication;
 
     @GetMapping("")
-    public Response index() {
-        Iterable<StateModel> states = this.stateApplication.getStateFromAPI();
-        List<Object> statesResponse = StateItem.toMap(states);
-        return Base.responseList(statesResponse);
+    public Response index(QueryParams queryParams) {
+        Iterable<StateModel> states;
+
+        states = this.stateApplication.getStateFromAPI(queryParams);
+        List<Object> response = StateItem.toMap(states);
+        if (!queryParams.isPagination()) {
+            return Base.responseList(response);
+        }
+
+        int total = IterableUtils.size(states);
+        Pagination pagination = new Pagination(queryParams.getPage(), queryParams.getPerPage(), total);
+        return Base.responsePagination(response, pagination);
     }
 
     @GetMapping("/{id}")

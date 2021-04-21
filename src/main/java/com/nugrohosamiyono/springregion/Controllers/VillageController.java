@@ -9,11 +9,14 @@ import com.nugrohosamiyono.springregion.Exceptions.ValidationException;
 import com.nugrohosamiyono.springregion.Helpers.Base;
 import com.nugrohosamiyono.springregion.Helpers.Response;
 import com.nugrohosamiyono.springregion.Models.VillageModel;
+import com.nugrohosamiyono.springregion.Requests.QueryParams;
 import com.nugrohosamiyono.springregion.Requests.Village.VillageCreate;
 import com.nugrohosamiyono.springregion.Requests.Village.VillageUpdate;
+import com.nugrohosamiyono.springregion.Responses.Pagination;
 import com.nugrohosamiyono.springregion.Responses.Village.VillageDetail;
 import com.nugrohosamiyono.springregion.Responses.Village.VillageItem;
 
+import org.apache.commons.collections4.IterableUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -33,10 +36,18 @@ public class VillageController {
     private VillageApplication villageApplication;
 
     @GetMapping("")
-    public Response index() {
-        Iterable<VillageModel> villages = this.villageApplication.getVillageFromAPI();
-        List<Object> villagesItems = VillageItem.toMap(villages);
-        return Base.responseList(villagesItems);
+    public Response index(QueryParams queryParams) {
+        Iterable<VillageModel> villages;
+
+        villages = this.villageApplication.getVillageFromAPI(queryParams);
+        List<Object> response = VillageItem.toMap(villages);
+        if (!queryParams.isPagination()) {
+            return Base.responseList(response);
+        }
+
+        int total = IterableUtils.size(villages);
+        Pagination pagination = new Pagination(queryParams.getPage(), queryParams.getPerPage(), total);
+        return Base.responsePagination(response, pagination);
     }
 
     @GetMapping("/{id}")

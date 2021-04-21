@@ -13,9 +13,11 @@ import com.nugrohosamiyono.springregion.Models.CityModel;
 import com.nugrohosamiyono.springregion.Requests.QueryParams;
 import com.nugrohosamiyono.springregion.Requests.City.CityCreate;
 import com.nugrohosamiyono.springregion.Requests.City.CityUpdate;
+import com.nugrohosamiyono.springregion.Responses.Pagination;
 import com.nugrohosamiyono.springregion.Responses.City.CityDetail;
 import com.nugrohosamiyono.springregion.Responses.City.CityItem;
 
+import org.apache.commons.collections4.IterableUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -36,9 +38,17 @@ public class CityController {
 
     @GetMapping("")
     public Response index(QueryParams queryParams) {
-        Iterable<CityModel> cities = this.cityApplication.getCityFromAPI();
+        Iterable<CityModel> cities;
+
+        cities = this.cityApplication.getCityFromAPI(queryParams);
         List<Object> response = CityItem.toMap(cities);
-        return Base.responseList(response);
+        if (!queryParams.isPagination()) {
+            return Base.responseList(response);
+        }
+
+        int total = IterableUtils.size(cities);
+        Pagination pagination = new Pagination(queryParams.getPage(), queryParams.getPerPage(), total);
+        return Base.responsePagination(response, pagination);
     }
 
     @GetMapping("/{id}")

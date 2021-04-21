@@ -3,6 +3,7 @@ package com.nugrohosamiyono.springregion.Helpers;
 import java.util.List;
 
 import com.nugrohosamiyono.springregion.Exceptions.ValidationException;
+import com.nugrohosamiyono.springregion.Responses.Pagination;
 
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -32,6 +33,10 @@ public class Base {
 
     public static Response responseMessage(String message) {
         return (new ResponseMessage(message));
+    }
+
+    public static Response responsePagination(List<Object> data, Pagination pagination) {
+        return (new ResponsePagination(data, pagination));
     }
 
     public static Response responseData(Object data) {

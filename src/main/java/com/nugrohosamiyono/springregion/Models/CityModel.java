@@ -5,8 +5,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
-@Entity // This tells Hibernate to make a table out of this class
+@Entity(name = "city_model") // This tells Hibernate to make a table out of this class
+@Table(name = "city_model")
 public class CityModel {
 
     @Id

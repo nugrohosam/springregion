@@ -5,6 +5,7 @@ import java.util.Optional;
 import com.nugrohosamiyono.springregion.Models.CityModel;
 import com.nugrohosamiyono.springregion.Repositories.StateRepository;
 import com.nugrohosamiyono.springregion.Repositories.CityRepository;
+import com.nugrohosamiyono.springregion.Requests.QueryParams;
 import com.nugrohosamiyono.springregion.Requests.City.CityCreate;
 import com.nugrohosamiyono.springregion.Requests.City.CityUpdate;
 
@@ -15,7 +16,7 @@ import org.springframework.stereotype.Component;
 public class CityApplication {
 
     @Autowired
-    private CityRepository CityRepository;
+    private CityRepository cityRepository;
     @Autowired
     private StateRepository stateRepository;
 
@@ -24,29 +25,30 @@ public class CityApplication {
         newCity.setState(this.stateRepository.findById(cityCreate.stateid).get());
         newCity.setName(cityCreate.name);
 
-        this.CityRepository.save(newCity);
+        this.cityRepository.save(newCity);
     }
 
     public void updateCityFromAPI(Integer id, CityUpdate cityUpdate) {
-        Optional<CityModel> CityOpt = this.CityRepository.findById(id);
+        Optional<CityModel> CityOpt = this.cityRepository.findById(id);
 
         CityModel updatCity = CityOpt.get();
         updatCity.setState(this.stateRepository.findById(cityUpdate.stateid).get());
         updatCity.setName(cityUpdate.name);
-        this.CityRepository.save(updatCity);
+        this.cityRepository.save(updatCity);
     }
 
     public void deleteCityFromAPI(Integer id) {
-        this.CityRepository.deleteById(id);
+        this.cityRepository.deleteById(id);
     }
 
-    public Iterable<CityModel> getCityFromAPI() {
-        return this.CityRepository.findAll();
+    public Iterable<CityModel> getCityFromAPI(QueryParams queryParams) {
+        int offset = (queryParams.getPage() - 1) * queryParams.getPage();
+        return this.cityRepository.findAllLimitOffsetByCustomQuery(queryParams.getSearch(), offset, queryParams.getPerPage());
     }
 
     public CityModel detailCity(Integer id) {
-        Optional<CityModel> cityOpt = this.CityRepository.findById(id);
-        if (cityOpt.isEmpty()){
+        Optional<CityModel> cityOpt = this.cityRepository.findById(id);
+        if (cityOpt.isEmpty()) {
             return (new CityModel());
         }
 
