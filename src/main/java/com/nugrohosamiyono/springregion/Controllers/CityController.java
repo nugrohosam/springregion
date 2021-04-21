@@ -54,6 +54,10 @@ public class CityController {
     @GetMapping("/{id}")
     public Response show(@PathVariable Integer id) {
         CityModel city = this.cityApplication.detailCity(id);
+        if (city == null) {
+            return Base.responseData(null);
+        }
+        
         CityDetail response = new CityDetail(city);
         return Base.responseData(response);
     }

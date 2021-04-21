@@ -51,7 +51,7 @@ public class VillageApplication {
     public VillageModel detailVillage(Integer id) {
         Optional<VillageModel> villageOpt = this.villageRepository.findById(id);
         if (villageOpt.isEmpty()) {
-            return (new VillageModel());
+            return null;
         }
 
         return villageOpt.get();

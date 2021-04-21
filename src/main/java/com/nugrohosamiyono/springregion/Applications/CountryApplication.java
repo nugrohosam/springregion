@@ -45,7 +45,7 @@ public class CountryApplication {
     public CountryModel detailCountry(Integer id) {
         Optional<CountryModel> countOpt = this.countryRepository.findById(id);
         if (countOpt.isEmpty()){
-            return (new CountryModel());
+            return null;
         }
         
         return countOpt.get();

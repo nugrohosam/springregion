@@ -9,29 +9,33 @@ import javax.persistence.PersistenceContext;
 import com.nugrohosamiyono.springregion.Models.VillageModel;
 import org.springframework.data.repository.Repository;
 
-@org.springframework.stereotype.Repository
+import org.springframework.stereotype.Component;
+
+@Component
 public class VillageRepository implements Repository<VillageModel, Integer> {
 
     @PersistenceContext
     private EntityManager entityManager;
 
     public List<VillageModel> findAllLimitOffsetByCustomQuery(String search, int offset, int limit) {
-        return this.entityManager
-                .createQuery("SELECT cm FROM city_model cm WHERE cm.name LIKE '%" + search + "%'", VillageModel.class)
-                .setFirstResult(offset).setMaxResults(limit).getResultList();
+        return this.entityManager.createQuery("SELECT vm FROM village_model vm WHERE vm.name LIKE '%" + search + "%'",
+                VillageModel.class).setFirstResult(offset).setMaxResults(limit).getResultList();
     }
 
     public Optional<VillageModel> findById(Integer id) {
-        VillageModel cityModel = this.entityManager.find(VillageModel.class, id);
-        return Optional.of(cityModel);
+        VillageModel villageModel = this.entityManager.find(VillageModel.class, id);
+        if (villageModel == null) {
+            return Optional.empty();
+        }
+        return Optional.of(villageModel);
     }
 
-    public void save(VillageModel cityModel) {
-        this.entityManager.persist(cityModel);
+    public void save(VillageModel villageModel) {
+        this.entityManager.persist(villageModel);
     }
 
     public void deleteById(Integer id) {
-        VillageModel cityModel = this.findById(id).get();
-        this.entityManager.remove(cityModel);
+        VillageModel villageModel = this.findById(id).get();
+        this.entityManager.remove(villageModel);
     }
 }

@@ -53,6 +53,10 @@ public class VillageController {
     @GetMapping("/{id}")
     public Response show(@PathVariable Integer id) {
         VillageModel village = this.villageApplication.detailVillage(id);
+        if (village == null) {
+            return Base.responseData(null);
+        }
+
         VillageDetail villageDetail = new VillageDetail(village);
         return Base.responseData(villageDetail);
     }

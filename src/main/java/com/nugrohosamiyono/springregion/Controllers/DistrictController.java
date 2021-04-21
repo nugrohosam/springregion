@@ -53,6 +53,10 @@ public class DistrictController {
     @GetMapping("/{id}")
     public Response show(@PathVariable Integer id) {
         DistrictModel district = this.districtApplication.detailDistrict(id);
+        if (district == null) {
+            return Base.responseData(null);
+        }
+        
         DistrictDetail districtDetail = new DistrictDetail(district);
         return Base.responseData(districtDetail);
     }

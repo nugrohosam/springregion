@@ -49,7 +49,7 @@ public class CityApplication {
     public CityModel detailCity(Integer id) {
         Optional<CityModel> cityOpt = this.cityRepository.findById(id);
         if (cityOpt.isEmpty()) {
-            return (new CityModel());
+            return null;
         }
 
         return cityOpt.get();

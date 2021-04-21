@@ -7,10 +7,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import com.nugrohosamiyono.springregion.Models.CityModel;
-
 import org.springframework.data.repository.Repository;
 
-@org.springframework.stereotype.Repository
+import org.springframework.stereotype.Component;
+
+@Component
 public class CityRepository implements Repository<CityModel, Integer> {
 
     @PersistenceContext
@@ -25,6 +26,9 @@ public class CityRepository implements Repository<CityModel, Integer> {
 
     public Optional<CityModel> findById(Integer id) {
         CityModel cityModel = this.entityManager.find(CityModel.class, id);
+        if (cityModel == null) {
+            return Optional.empty();
+        }
         return Optional.of(cityModel);
     }
 

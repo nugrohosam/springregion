@@ -51,7 +51,7 @@ public class DistrictApplication {
     public DistrictModel detailDistrict(Integer id) {
         Optional<DistrictModel> districtOpt = this.districtRepository.findById(id);
         if (districtOpt.isEmpty()) {
-            return (new DistrictModel());
+            return null;
         }
 
         return districtOpt.get();

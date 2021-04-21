@@ -53,6 +53,10 @@ public class CountryController {
     @GetMapping("/{id}")
     public Response show(@PathVariable Integer id) {
         CountryModel country = this.countryApplication.detailCountry(id);
+        if (country == null) {
+            return Base.responseData(null);
+        }
+        
         CountryDetail countryDetail = new CountryDetail(country);
         return Base.responseData(countryDetail);
     }

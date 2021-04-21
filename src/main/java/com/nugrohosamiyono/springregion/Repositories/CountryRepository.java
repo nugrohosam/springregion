@@ -9,29 +9,34 @@ import javax.persistence.PersistenceContext;
 import com.nugrohosamiyono.springregion.Models.CountryModel;
 import org.springframework.data.repository.Repository;
 
-@org.springframework.stereotype.Repository
+import org.springframework.stereotype.Component;
+
+@Component
 public class CountryRepository implements Repository<CountryModel, Integer> {
 
     @PersistenceContext
     private EntityManager entityManager;
 
     public List<CountryModel> findAllLimitOffsetByCustomQuery(String search, int offset, int limit) {
-        return this.entityManager
-                .createQuery("SELECT cm FROM city_model cm WHERE cm.name LIKE '%" + search + "%'", CountryModel.class)
-                .setFirstResult(offset).setMaxResults(limit).getResultList();
+        return this.entityManager.createQuery("SELECT cm FROM country_model cm WHERE cm.name LIKE '%" + search + "%'",
+                CountryModel.class).setFirstResult(offset).setMaxResults(limit).getResultList();
     }
 
     public Optional<CountryModel> findById(Integer id) {
-        CountryModel cityModel = this.entityManager.find(CountryModel.class, id);
-        return Optional.of(cityModel);
+        CountryModel countryModel = this.entityManager.find(CountryModel.class, id);
+        if (countryModel == null) {
+            return Optional.empty();
+        }
+
+        return Optional.of(countryModel);
     }
 
-    public void save(CountryModel cityModel) {
-        this.entityManager.persist(cityModel);
+    public void save(CountryModel countryModel) {
+        this.entityManager.persist(countryModel);
     }
 
     public void deleteById(Integer id) {
-        CountryModel cityModel = this.findById(id).get();
-        this.entityManager.remove(cityModel);
+        CountryModel countryModel = this.findById(id).get();
+        this.entityManager.remove(countryModel);
     }
 }

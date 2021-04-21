@@ -53,6 +53,10 @@ public class StateController {
     @GetMapping("/{id}")
     public Response show(@PathVariable Integer id) {
         StateModel state = this.stateApplication.detailState(id);
+        if (state == null) {
+            return Base.responseData(null);
+        }
+
         StateDetail stateDetail = new StateDetail(state);
         return Base.responseData(stateDetail);
     }

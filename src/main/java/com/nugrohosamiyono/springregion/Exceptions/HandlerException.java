@@ -30,6 +30,9 @@ public class HandlerException extends ResponseEntityExceptionHandler {
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<Object> handleExceptions(RuntimeException exception, WebRequest webRequest) {
         ResponseError responseError = new ResponseError("Internal Server Error");
+
+        logger.error(exception);
+
         ResponseEntity<Object> response = new ResponseEntity<>(responseError, HttpStatus.INTERNAL_SERVER_ERROR);
         return response;
     }
