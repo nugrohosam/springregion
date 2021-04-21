@@ -44,7 +44,7 @@ public class VillageApplication {
 
     public Iterable<VillageModel> getVillageFromAPI(QueryParams queryParams) {
         int offset = (queryParams.getPage() - 1) * queryParams.getPage();
-        return this.villageRepository.findAllLimitOffsetByCustomQuery(queryParams.getSearch(), offset,
+        return this.villageRepository.findAllSearchLimitOffset(queryParams.getSearch(), offset,
                 queryParams.getPerPage());
     }
 

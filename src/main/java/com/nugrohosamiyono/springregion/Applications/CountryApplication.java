@@ -39,7 +39,7 @@ public class CountryApplication {
 
     public Iterable<CountryModel> getCountryFromAPI(QueryParams queryParams) {
         int offset = (queryParams.getPage() - 1) * queryParams.getPage();
-        return this.countryRepository.findAllLimitOffsetByCustomQuery(queryParams.getSearch(), offset, queryParams.getPerPage());
+        return this.countryRepository.findAllSearchLimitOffset(queryParams.getSearch(), offset, queryParams.getPerPage());
     }
 
     public CountryModel detailCountry(Integer id) {

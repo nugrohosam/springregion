@@ -43,7 +43,7 @@ public class StateApplication {
 
     public Iterable<StateModel> getStateFromAPI(QueryParams queryParams) {
         int offset = (queryParams.getPage() - 1) * queryParams.getPage();
-        return this.stateRepository.findAllLimitOffsetByCustomQuery(queryParams.getSearch(), offset,
+        return this.stateRepository.findAllSearchLimitOffset(queryParams.getSearch(), offset,
                 queryParams.getPerPage());
     }
 

@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import com.nugrohosamiyono.springregion.Helpers.Base;
 import com.nugrohosamiyono.springregion.Models.CountryModel;
 import org.springframework.data.repository.Repository;
 
@@ -17,7 +18,7 @@ public class CountryRepository implements Repository<CountryModel, Integer> {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public List<CountryModel> findAllLimitOffsetByCustomQuery(String search, int offset, int limit) {
+    public List<CountryModel> findAllSearchLimitOffset(String search, int offset, int limit) {
         return this.entityManager.createQuery("SELECT cm FROM country_model cm WHERE cm.name LIKE '%" + search + "%'",
                 CountryModel.class).setFirstResult(offset).setMaxResults(limit).getResultList();
     }
@@ -29,6 +30,14 @@ public class CountryRepository implements Repository<CountryModel, Integer> {
         }
 
         return Optional.of(countryModel);
+    }
+    
+    public List<CountryModel> findAllWhereInId(List<Object> id) {
+        String whereIn = Base.queryWhereIn(id);
+
+        return this.entityManager
+                .createQuery("SELECT cm FROM country_model cm WHERE cm.id IN " + whereIn, CountryModel.class)
+                .getResultList();
     }
 
     public void save(CountryModel countryModel) {

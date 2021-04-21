@@ -46,4 +46,15 @@ public class Base {
     public static Response responseList(List<Object> data) {
         return (new ResponseItems(data));
     }
+
+    public static String queryWhereIn(List<Object> data) {
+        String dataToString[] = new String[data.size()];
+        int index = 0;
+        for (Object list : data) {
+            dataToString[index] = list.toString();
+            index++;
+        }
+
+        return "(" + String.join(",", dataToString) + ")";
+    }
 }

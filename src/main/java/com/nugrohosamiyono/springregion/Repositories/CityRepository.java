@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import com.nugrohosamiyono.springregion.Helpers.Base;
 import com.nugrohosamiyono.springregion.Models.CityModel;
 import org.springframework.data.repository.Repository;
 
@@ -24,11 +25,28 @@ public class CityRepository implements Repository<CityModel, Integer> {
     // + search
     // + "%' )
 
-    public List<CityModel> findAllLimitOffsetByCustomQuery(String search, int offset, int limit) {
+    // Join
+    // INNER JOIN cm.state sm
+
+    public List<CityModel> findAllSearchLimitOffset(String search, int offset, int limit) {
         return this.entityManager
-                .createQuery("SELECT cm FROM city_model cm INNER JOIN cm.state sm WHERE cm.name LIKE '%" + search
-                        + "%'", CityModel.class)
+                .createQuery("SELECT cm FROM city_model cm WHERE cm.name LIKE '%" + search + "%'", CityModel.class)
                 .setFirstResult(offset).setMaxResults(limit).getResultList();
+    }
+
+    public List<CityModel> findAllWhereInState(List<Object> stateIds) {
+        String whereIn = Base.queryWhereIn(stateIds);
+
+        return this.entityManager
+                .createQuery("SELECT cm FROM city_model cm WHERE cm.state_id IN " + whereIn, CityModel.class)
+                .getResultList();
+    }
+
+    public List<CityModel> findAllWhereInId(List<Object> id) {
+        String whereIn = Base.queryWhereIn(id);
+
+        return this.entityManager.createQuery("SELECT cm FROM city_model cm WHERE cm.id IN " + whereIn, CityModel.class)
+                .getResultList();
     }
 
     public Optional<CityModel> findById(Integer id) {

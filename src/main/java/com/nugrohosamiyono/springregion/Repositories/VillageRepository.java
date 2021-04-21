@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import com.nugrohosamiyono.springregion.Helpers.Base;
 import com.nugrohosamiyono.springregion.Models.VillageModel;
 import org.springframework.data.repository.Repository;
 
@@ -17,7 +18,7 @@ public class VillageRepository implements Repository<VillageModel, Integer> {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public List<VillageModel> findAllLimitOffsetByCustomQuery(String search, int offset, int limit) {
+    public List<VillageModel> findAllSearchLimitOffset(String search, int offset, int limit) {
         return this.entityManager.createQuery("SELECT vm FROM village_model vm WHERE vm.name LIKE '%" + search + "%'",
                 VillageModel.class).setFirstResult(offset).setMaxResults(limit).getResultList();
     }
@@ -28,6 +29,22 @@ public class VillageRepository implements Repository<VillageModel, Integer> {
             return Optional.empty();
         }
         return Optional.of(villageModel);
+    }
+
+    public List<VillageModel> findAllWhereInDistrict(List<Object> villageIds) {
+        String whereIn = Base.queryWhereIn(villageIds);
+
+        return this.entityManager
+                .createQuery("SELECT vm FROM village_model vm WHERE vm.district_id IN " + whereIn, VillageModel.class)
+                .getResultList();
+    }
+
+    public List<VillageModel> findAllWhereInId(List<Object> id) {
+        String whereIn = Base.queryWhereIn(id);
+
+        return this.entityManager
+                .createQuery("SELECT vm FROM village_model vm WHERE vm.id IN " + whereIn, VillageModel.class)
+                .getResultList();
     }
 
     public void save(VillageModel villageModel) {

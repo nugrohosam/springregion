@@ -43,7 +43,7 @@ public class CityApplication {
 
     public Iterable<CityModel> getCityFromAPI(QueryParams queryParams) {
         int offset = (queryParams.getPage() - 1) * queryParams.getPage();
-        return this.cityRepository.findAllLimitOffsetByCustomQuery(queryParams.getSearch(), offset, queryParams.getPerPage());
+        return this.cityRepository.findAllSearchLimitOffset(queryParams.getSearch(), offset, queryParams.getPerPage());
     }
 
     public CityModel detailCity(Integer id) {

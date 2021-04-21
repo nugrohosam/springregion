@@ -44,7 +44,7 @@ public class DistrictApplication {
 
     public Iterable<DistrictModel> getDistrictFromAPI(QueryParams queryParams) {
         int offset = (queryParams.getPage() - 1) * queryParams.getPage();
-        return this.districtRepository.findAllLimitOffsetByCustomQuery(queryParams.getSearch(), offset,
+        return this.districtRepository.findAllSearchLimitOffset(queryParams.getSearch(), offset,
                 queryParams.getPerPage());
     }
 
