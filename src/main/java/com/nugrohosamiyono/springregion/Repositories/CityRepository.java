@@ -16,9 +16,9 @@ public class CityRepository implements Repository<CityModel, Integer> {
     private EntityManager entityManager;
 
     public List<CityModel> findAllLimitOffsetByCustomQuery(String search, int offset, int limit) {
-        // JOIN cm.state sm
+        // JOIN cm.[name variable] [alias]
         return this.entityManager
-                .createQuery("SELECT cm FROM city_model cm JOIN cm.state sm WHERE cm.name LIKE '%" + search + "%'", CityModel.class)
+                .createQuery("SELECT cm FROM city_model cm WHERE cm.name LIKE '%" + search + "%'", CityModel.class)
                 .setFirstResult(offset).setMaxResults(limit).getResultList();
     }
 
