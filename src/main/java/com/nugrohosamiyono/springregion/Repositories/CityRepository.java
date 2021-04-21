@@ -17,10 +17,17 @@ public class CityRepository implements Repository<CityModel, Integer> {
     @PersistenceContext
     private EntityManager entityManager;
 
+    // Where in subquery select
+    // SELECT cm FROM city_model cm INNER JOIN cm.state sm WHERE cm.name LIKE '%" +
+    // search
+    // + "%' AND sm.id IN ( SELECT ssm.id FROM cm.state ssm WHERE ssm.name like '%"
+    // + search
+    // + "%' )
+
     public List<CityModel> findAllLimitOffsetByCustomQuery(String search, int offset, int limit) {
-        // JOIN cm.[name variable] [alias]
         return this.entityManager
-                .createQuery("SELECT cm FROM city_model cm WHERE cm.name LIKE '%" + search + "%'", CityModel.class)
+                .createQuery("SELECT cm FROM city_model cm INNER JOIN cm.state sm WHERE cm.name LIKE '%" + search
+                        + "%'", CityModel.class)
                 .setFirstResult(offset).setMaxResults(limit).getResultList();
     }
 
