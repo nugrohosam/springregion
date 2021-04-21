@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+package com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService;
+
+message GetAuthRequest {
+    string token = 1;
+}
+
+message GetAuthResponse {
+    double id = 1;
+    string name = 2;
+    string username = 3;
+    string email = 4;
+}
+
+message GetAuthIdResponse {
+    double id = 1;
+}
+
+service GetAuthService {
+    rpc GetAuth(GetAuthRequest) returns (GetAuthResponse);
+    rpc GetAuthID(GetAuthRequest) returns (GetAuthIdResponse);
+}
+
+message ValidationResponse {
+    bool valid = 1;
+}
+
+service ValidationService {
+    rpc Validate(GetAuthRequest) returns (ValidationResponse);
+}

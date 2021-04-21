@@ -9,5 +9,4 @@ class SpringregionApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-
 }
