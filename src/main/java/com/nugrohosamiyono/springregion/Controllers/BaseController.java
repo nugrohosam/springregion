@@ -1,9 +1,6 @@
 package com.nugrohosamiyono.springregion.Controllers;
 
-import javax.validation.Valid;
-
 import com.nugrohosamiyono.springregion.Applications.AuthenticateApplication;
-import com.nugrohosamiyono.springregion.Exceptions.ValidationException;
 import com.nugrohosamiyono.springregion.Helpers.Base;
 import com.nugrohosamiyono.springregion.Helpers.Responses.Response;
 import com.nugrohosamiyono.springregion.ThirdParty.Authenticate.Models.AuthInfo;
