@@ -1,4 +1,4 @@
-package com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService;
+package proto;
 
 import static io.grpc.MethodDescriptor.generateFullMethodName;
 
@@ -7,36 +7,37 @@ import static io.grpc.MethodDescriptor.generateFullMethodName;
 @javax.annotation.Generated(
     value = "by gRPC proto compiler (version 1.37.0)",
     comments = "Source: src/main/java/com/nugrohosamiyono/springregion/ThirdParty/Authenticate/Protos/AuthService.proto")
-public final class GetAuthService {
+public final class GetAuthServiceGrpc {
 
-  private GetAuthService() {}
+  private GetAuthServiceGrpc() {}
 
-  public static final String SERVICE_NAME = "com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.GetAuthService";
+  public static final String SERVICE_NAME = "proto.GetAuthService";
 
   // Static method descriptors that strictly reflect the proto.
-  private static volatile io.grpc.MethodDescriptor<com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.GetAuthRequest,
-      com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.GetAuthResponse> getGetAuthMethod;
+  private static volatile io.grpc.MethodDescriptor<proto.AuthService.GetAuthRequest,
+      proto.AuthService.GetAuthResponse> getGetAuthMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "GetAuth",
-      requestType = com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.GetAuthRequest.class,
-      responseType = com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.GetAuthResponse.class,
+      requestType = proto.AuthService.GetAuthRequest.class,
+      responseType = proto.AuthService.GetAuthResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.GetAuthRequest,
-      com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.GetAuthResponse> getGetAuthMethod() {
-    io.grpc.MethodDescriptor<com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.GetAuthRequest, com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.GetAuthResponse> getGetAuthMethod;
-    if ((getGetAuthMethod = GetAuthService.getGetAuthMethod) == null) {
-      synchronized (GetAuthService.class) {
-        if ((getGetAuthMethod = GetAuthService.getGetAuthMethod) == null) {
-          GetAuthService.getGetAuthMethod = getGetAuthMethod =
-              io.grpc.MethodDescriptor.<com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.GetAuthRequest, com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.GetAuthResponse>newBuilder()
+  public static io.grpc.MethodDescriptor<proto.AuthService.GetAuthRequest,
+      proto.AuthService.GetAuthResponse> getGetAuthMethod() {
+    io.grpc.MethodDescriptor<proto.AuthService.GetAuthRequest, proto.AuthService.GetAuthResponse> getGetAuthMethod;
+    if ((getGetAuthMethod = GetAuthServiceGrpc.getGetAuthMethod) == null) {
+      synchronized (GetAuthServiceGrpc.class) {
+        if ((getGetAuthMethod = GetAuthServiceGrpc.getGetAuthMethod) == null) {
+          GetAuthServiceGrpc.getGetAuthMethod = getGetAuthMethod =
+              io.grpc.MethodDescriptor.<proto.AuthService.GetAuthRequest, proto.AuthService.GetAuthResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GetAuth"))
               .setSampledToLocalTracing(true)
-              .setRequestMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
-                  com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.GetAuthRequest.getDefaultInstance()))
-              .setResponseMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
-                  com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.GetAuthResponse.getDefaultInstance()))
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  proto.AuthService.GetAuthRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  proto.AuthService.GetAuthResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new GetAuthServiceMethodDescriptorSupplier("GetAuth"))
               .build();
         }
       }
@@ -44,29 +45,30 @@ public final class GetAuthService {
     return getGetAuthMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.GetAuthRequest,
-      com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.GetAuthIdResponse> getGetAuthIDMethod;
+  private static volatile io.grpc.MethodDescriptor<proto.AuthService.GetAuthRequest,
+      proto.AuthService.GetAuthIdResponse> getGetAuthIDMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "GetAuthID",
-      requestType = com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.GetAuthRequest.class,
-      responseType = com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.GetAuthIdResponse.class,
+      requestType = proto.AuthService.GetAuthRequest.class,
+      responseType = proto.AuthService.GetAuthIdResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.GetAuthRequest,
-      com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.GetAuthIdResponse> getGetAuthIDMethod() {
-    io.grpc.MethodDescriptor<com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.GetAuthRequest, com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.GetAuthIdResponse> getGetAuthIDMethod;
-    if ((getGetAuthIDMethod = GetAuthService.getGetAuthIDMethod) == null) {
-      synchronized (GetAuthService.class) {
-        if ((getGetAuthIDMethod = GetAuthService.getGetAuthIDMethod) == null) {
-          GetAuthService.getGetAuthIDMethod = getGetAuthIDMethod =
-              io.grpc.MethodDescriptor.<com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.GetAuthRequest, com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.GetAuthIdResponse>newBuilder()
+  public static io.grpc.MethodDescriptor<proto.AuthService.GetAuthRequest,
+      proto.AuthService.GetAuthIdResponse> getGetAuthIDMethod() {
+    io.grpc.MethodDescriptor<proto.AuthService.GetAuthRequest, proto.AuthService.GetAuthIdResponse> getGetAuthIDMethod;
+    if ((getGetAuthIDMethod = GetAuthServiceGrpc.getGetAuthIDMethod) == null) {
+      synchronized (GetAuthServiceGrpc.class) {
+        if ((getGetAuthIDMethod = GetAuthServiceGrpc.getGetAuthIDMethod) == null) {
+          GetAuthServiceGrpc.getGetAuthIDMethod = getGetAuthIDMethod =
+              io.grpc.MethodDescriptor.<proto.AuthService.GetAuthRequest, proto.AuthService.GetAuthIdResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GetAuthID"))
               .setSampledToLocalTracing(true)
-              .setRequestMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
-                  com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.GetAuthRequest.getDefaultInstance()))
-              .setResponseMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
-                  com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.GetAuthIdResponse.getDefaultInstance()))
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  proto.AuthService.GetAuthRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  proto.AuthService.GetAuthIdResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new GetAuthServiceMethodDescriptorSupplier("GetAuthID"))
               .build();
         }
       }
@@ -124,15 +126,15 @@ public final class GetAuthService {
 
     /**
      */
-    public void getAuth(com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.GetAuthRequest request,
-        io.grpc.stub.StreamObserver<com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.GetAuthResponse> responseObserver) {
+    public void getAuth(proto.AuthService.GetAuthRequest request,
+        io.grpc.stub.StreamObserver<proto.AuthService.GetAuthResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetAuthMethod(), responseObserver);
     }
 
     /**
      */
-    public void getAuthID(com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.GetAuthRequest request,
-        io.grpc.stub.StreamObserver<com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.GetAuthIdResponse> responseObserver) {
+    public void getAuthID(proto.AuthService.GetAuthRequest request,
+        io.grpc.stub.StreamObserver<proto.AuthService.GetAuthIdResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetAuthIDMethod(), responseObserver);
     }
 
@@ -142,15 +144,15 @@ public final class GetAuthService {
             getGetAuthMethod(),
             io.grpc.stub.ServerCalls.asyncUnaryCall(
               new MethodHandlers<
-                com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.GetAuthRequest,
-                com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.GetAuthResponse>(
+                proto.AuthService.GetAuthRequest,
+                proto.AuthService.GetAuthResponse>(
                   this, METHODID_GET_AUTH)))
           .addMethod(
             getGetAuthIDMethod(),
             io.grpc.stub.ServerCalls.asyncUnaryCall(
               new MethodHandlers<
-                com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.GetAuthRequest,
-                com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.GetAuthIdResponse>(
+                proto.AuthService.GetAuthRequest,
+                proto.AuthService.GetAuthIdResponse>(
                   this, METHODID_GET_AUTH_ID)))
           .build();
     }
@@ -172,16 +174,16 @@ public final class GetAuthService {
 
     /**
      */
-    public void getAuth(com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.GetAuthRequest request,
-        io.grpc.stub.StreamObserver<com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.GetAuthResponse> responseObserver) {
+    public void getAuth(proto.AuthService.GetAuthRequest request,
+        io.grpc.stub.StreamObserver<proto.AuthService.GetAuthResponse> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getGetAuthMethod(), getCallOptions()), request, responseObserver);
     }
 
     /**
      */
-    public void getAuthID(com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.GetAuthRequest request,
-        io.grpc.stub.StreamObserver<com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.GetAuthIdResponse> responseObserver) {
+    public void getAuthID(proto.AuthService.GetAuthRequest request,
+        io.grpc.stub.StreamObserver<proto.AuthService.GetAuthIdResponse> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getGetAuthIDMethod(), getCallOptions()), request, responseObserver);
     }
@@ -203,14 +205,14 @@ public final class GetAuthService {
 
     /**
      */
-    public com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.GetAuthResponse getAuth(com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.GetAuthRequest request) {
+    public proto.AuthService.GetAuthResponse getAuth(proto.AuthService.GetAuthRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getGetAuthMethod(), getCallOptions(), request);
     }
 
     /**
      */
-    public com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.GetAuthIdResponse getAuthID(com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.GetAuthRequest request) {
+    public proto.AuthService.GetAuthIdResponse getAuthID(proto.AuthService.GetAuthRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getGetAuthIDMethod(), getCallOptions(), request);
     }
@@ -232,16 +234,16 @@ public final class GetAuthService {
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.GetAuthResponse> getAuth(
-        com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.GetAuthRequest request) {
+    public com.google.common.util.concurrent.ListenableFuture<proto.AuthService.GetAuthResponse> getAuth(
+        proto.AuthService.GetAuthRequest request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getGetAuthMethod(), getCallOptions()), request);
     }
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.GetAuthIdResponse> getAuthID(
-        com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.GetAuthRequest request) {
+    public com.google.common.util.concurrent.ListenableFuture<proto.AuthService.GetAuthIdResponse> getAuthID(
+        proto.AuthService.GetAuthRequest request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getGetAuthIDMethod(), getCallOptions()), request);
     }
@@ -268,12 +270,12 @@ public final class GetAuthService {
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
         case METHODID_GET_AUTH:
-          serviceImpl.getAuth((com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.GetAuthRequest) request,
-              (io.grpc.stub.StreamObserver<com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.GetAuthResponse>) responseObserver);
+          serviceImpl.getAuth((proto.AuthService.GetAuthRequest) request,
+              (io.grpc.stub.StreamObserver<proto.AuthService.GetAuthResponse>) responseObserver);
           break;
         case METHODID_GET_AUTH_ID:
-          serviceImpl.getAuthID((com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.GetAuthRequest) request,
-              (io.grpc.stub.StreamObserver<com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.GetAuthIdResponse>) responseObserver);
+          serviceImpl.getAuthID((proto.AuthService.GetAuthRequest) request,
+              (io.grpc.stub.StreamObserver<proto.AuthService.GetAuthIdResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -291,15 +293,51 @@ public final class GetAuthService {
     }
   }
 
+  private static abstract class GetAuthServiceBaseDescriptorSupplier
+      implements io.grpc.protobuf.ProtoFileDescriptorSupplier, io.grpc.protobuf.ProtoServiceDescriptorSupplier {
+    GetAuthServiceBaseDescriptorSupplier() {}
+
+    @java.lang.Override
+    public com.google.protobuf.Descriptors.FileDescriptor getFileDescriptor() {
+      return proto.AuthService.getDescriptor();
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Descriptors.ServiceDescriptor getServiceDescriptor() {
+      return getFileDescriptor().findServiceByName("GetAuthService");
+    }
+  }
+
+  private static final class GetAuthServiceFileDescriptorSupplier
+      extends GetAuthServiceBaseDescriptorSupplier {
+    GetAuthServiceFileDescriptorSupplier() {}
+  }
+
+  private static final class GetAuthServiceMethodDescriptorSupplier
+      extends GetAuthServiceBaseDescriptorSupplier
+      implements io.grpc.protobuf.ProtoMethodDescriptorSupplier {
+    private final String methodName;
+
+    GetAuthServiceMethodDescriptorSupplier(String methodName) {
+      this.methodName = methodName;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Descriptors.MethodDescriptor getMethodDescriptor() {
+      return getServiceDescriptor().findMethodByName(methodName);
+    }
+  }
+
   private static volatile io.grpc.ServiceDescriptor serviceDescriptor;
 
   public static io.grpc.ServiceDescriptor getServiceDescriptor() {
     io.grpc.ServiceDescriptor result = serviceDescriptor;
     if (result == null) {
-      synchronized (GetAuthService.class) {
+      synchronized (GetAuthServiceGrpc.class) {
         result = serviceDescriptor;
         if (result == null) {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
+              .setSchemaDescriptor(new GetAuthServiceFileDescriptorSupplier())
               .addMethod(getGetAuthMethod())
               .addMethod(getGetAuthIDMethod())
               .build();

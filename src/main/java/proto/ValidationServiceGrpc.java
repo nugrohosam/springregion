@@ -1,4 +1,4 @@
-package com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService;
+package proto;
 
 import static io.grpc.MethodDescriptor.generateFullMethodName;
 
@@ -7,36 +7,37 @@ import static io.grpc.MethodDescriptor.generateFullMethodName;
 @javax.annotation.Generated(
     value = "by gRPC proto compiler (version 1.37.0)",
     comments = "Source: src/main/java/com/nugrohosamiyono/springregion/ThirdParty/Authenticate/Protos/AuthService.proto")
-public final class ValidationService {
+public final class ValidationServiceGrpc {
 
-  private ValidationService() {}
+  private ValidationServiceGrpc() {}
 
-  public static final String SERVICE_NAME = "com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.ValidationService";
+  public static final String SERVICE_NAME = "proto.ValidationService";
 
   // Static method descriptors that strictly reflect the proto.
-  private static volatile io.grpc.MethodDescriptor<com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.GetAuthRequest,
-      com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.ValidationResponse> getValidateMethod;
+  private static volatile io.grpc.MethodDescriptor<proto.AuthService.GetAuthRequest,
+      proto.AuthService.ValidationResponse> getValidateMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "Validate",
-      requestType = com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.GetAuthRequest.class,
-      responseType = com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.ValidationResponse.class,
+      requestType = proto.AuthService.GetAuthRequest.class,
+      responseType = proto.AuthService.ValidationResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.GetAuthRequest,
-      com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.ValidationResponse> getValidateMethod() {
-    io.grpc.MethodDescriptor<com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.GetAuthRequest, com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.ValidationResponse> getValidateMethod;
-    if ((getValidateMethod = ValidationService.getValidateMethod) == null) {
-      synchronized (ValidationService.class) {
-        if ((getValidateMethod = ValidationService.getValidateMethod) == null) {
-          ValidationService.getValidateMethod = getValidateMethod =
-              io.grpc.MethodDescriptor.<com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.GetAuthRequest, com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.ValidationResponse>newBuilder()
+  public static io.grpc.MethodDescriptor<proto.AuthService.GetAuthRequest,
+      proto.AuthService.ValidationResponse> getValidateMethod() {
+    io.grpc.MethodDescriptor<proto.AuthService.GetAuthRequest, proto.AuthService.ValidationResponse> getValidateMethod;
+    if ((getValidateMethod = ValidationServiceGrpc.getValidateMethod) == null) {
+      synchronized (ValidationServiceGrpc.class) {
+        if ((getValidateMethod = ValidationServiceGrpc.getValidateMethod) == null) {
+          ValidationServiceGrpc.getValidateMethod = getValidateMethod =
+              io.grpc.MethodDescriptor.<proto.AuthService.GetAuthRequest, proto.AuthService.ValidationResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "Validate"))
               .setSampledToLocalTracing(true)
-              .setRequestMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
-                  com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.GetAuthRequest.getDefaultInstance()))
-              .setResponseMarshaller(io.grpc.protobuf.lite.ProtoLiteUtils.marshaller(
-                  com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.ValidationResponse.getDefaultInstance()))
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  proto.AuthService.GetAuthRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  proto.AuthService.ValidationResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new ValidationServiceMethodDescriptorSupplier("Validate"))
               .build();
         }
       }
@@ -94,8 +95,8 @@ public final class ValidationService {
 
     /**
      */
-    public void validate(com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.GetAuthRequest request,
-        io.grpc.stub.StreamObserver<com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.ValidationResponse> responseObserver) {
+    public void validate(proto.AuthService.GetAuthRequest request,
+        io.grpc.stub.StreamObserver<proto.AuthService.ValidationResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getValidateMethod(), responseObserver);
     }
 
@@ -105,8 +106,8 @@ public final class ValidationService {
             getValidateMethod(),
             io.grpc.stub.ServerCalls.asyncUnaryCall(
               new MethodHandlers<
-                com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.GetAuthRequest,
-                com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.ValidationResponse>(
+                proto.AuthService.GetAuthRequest,
+                proto.AuthService.ValidationResponse>(
                   this, METHODID_VALIDATE)))
           .build();
     }
@@ -128,8 +129,8 @@ public final class ValidationService {
 
     /**
      */
-    public void validate(com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.GetAuthRequest request,
-        io.grpc.stub.StreamObserver<com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.ValidationResponse> responseObserver) {
+    public void validate(proto.AuthService.GetAuthRequest request,
+        io.grpc.stub.StreamObserver<proto.AuthService.ValidationResponse> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getValidateMethod(), getCallOptions()), request, responseObserver);
     }
@@ -151,7 +152,7 @@ public final class ValidationService {
 
     /**
      */
-    public com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.ValidationResponse validate(com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.GetAuthRequest request) {
+    public proto.AuthService.ValidationResponse validate(proto.AuthService.GetAuthRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getValidateMethod(), getCallOptions(), request);
     }
@@ -173,8 +174,8 @@ public final class ValidationService {
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.ValidationResponse> validate(
-        com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.GetAuthRequest request) {
+    public com.google.common.util.concurrent.ListenableFuture<proto.AuthService.ValidationResponse> validate(
+        proto.AuthService.GetAuthRequest request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getValidateMethod(), getCallOptions()), request);
     }
@@ -200,8 +201,8 @@ public final class ValidationService {
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
         case METHODID_VALIDATE:
-          serviceImpl.validate((com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.GetAuthRequest) request,
-              (io.grpc.stub.StreamObserver<com.nugrohosamiyono.springregion.ThirdParty.Authenticate.ProtoService.ValidationResponse>) responseObserver);
+          serviceImpl.validate((proto.AuthService.GetAuthRequest) request,
+              (io.grpc.stub.StreamObserver<proto.AuthService.ValidationResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -219,15 +220,51 @@ public final class ValidationService {
     }
   }
 
+  private static abstract class ValidationServiceBaseDescriptorSupplier
+      implements io.grpc.protobuf.ProtoFileDescriptorSupplier, io.grpc.protobuf.ProtoServiceDescriptorSupplier {
+    ValidationServiceBaseDescriptorSupplier() {}
+
+    @java.lang.Override
+    public com.google.protobuf.Descriptors.FileDescriptor getFileDescriptor() {
+      return proto.AuthService.getDescriptor();
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Descriptors.ServiceDescriptor getServiceDescriptor() {
+      return getFileDescriptor().findServiceByName("ValidationService");
+    }
+  }
+
+  private static final class ValidationServiceFileDescriptorSupplier
+      extends ValidationServiceBaseDescriptorSupplier {
+    ValidationServiceFileDescriptorSupplier() {}
+  }
+
+  private static final class ValidationServiceMethodDescriptorSupplier
+      extends ValidationServiceBaseDescriptorSupplier
+      implements io.grpc.protobuf.ProtoMethodDescriptorSupplier {
+    private final String methodName;
+
+    ValidationServiceMethodDescriptorSupplier(String methodName) {
+      this.methodName = methodName;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Descriptors.MethodDescriptor getMethodDescriptor() {
+      return getServiceDescriptor().findMethodByName(methodName);
+    }
+  }
+
   private static volatile io.grpc.ServiceDescriptor serviceDescriptor;
 
   public static io.grpc.ServiceDescriptor getServiceDescriptor() {
     io.grpc.ServiceDescriptor result = serviceDescriptor;
     if (result == null) {
-      synchronized (ValidationService.class) {
+      synchronized (ValidationServiceGrpc.class) {
         result = serviceDescriptor;
         if (result == null) {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
+              .setSchemaDescriptor(new ValidationServiceFileDescriptorSupplier())
               .addMethod(getValidateMethod())
               .build();
         }
