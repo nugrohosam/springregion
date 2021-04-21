@@ -3,7 +3,7 @@
 ## Api Doc
 - https://documenter.getpostman.com/view/4473147/TzJuAdWB
 
-## Build protoc
+## Build protoc & gRPC service
 - follow this repos step : https://github.com/grpc/grpc-java/tree/master/compiler
 - run this : 
 ```
