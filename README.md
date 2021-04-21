@@ -12,3 +12,4 @@ protoc --plugin=protoc-gen-grpc-java=./cmd/grpc-java/compiler/build/exe/java_plu
 ```
 protoc --java_out=./src/main/java --proto_path=. ./src/main/java/com/nugrohosamiyono/springregion/ThirdParty/Authenticate/Protos/AuthService.proto 
 ```
+- this gRPC service use authenticate in api.auth.nugrohosamiyono.com, api docs in https://documenter.getpostman.com/view/4473147/TVzXDFka 
