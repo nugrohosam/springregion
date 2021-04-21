@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import com.nugrohosamiyono.springregion.Models.CityModel;
+
 import org.springframework.data.repository.Repository;
 
 @org.springframework.stereotype.Repository
