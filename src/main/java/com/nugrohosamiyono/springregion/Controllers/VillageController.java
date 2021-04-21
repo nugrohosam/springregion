@@ -7,7 +7,7 @@ import javax.validation.Valid;
 import com.nugrohosamiyono.springregion.Applications.VillageApplication;
 import com.nugrohosamiyono.springregion.Exceptions.ValidationException;
 import com.nugrohosamiyono.springregion.Helpers.Base;
-import com.nugrohosamiyono.springregion.Helpers.Response;
+import com.nugrohosamiyono.springregion.Helpers.Responses.Response;
 import com.nugrohosamiyono.springregion.Models.VillageModel;
 import com.nugrohosamiyono.springregion.Requests.QueryParams;
 import com.nugrohosamiyono.springregion.Requests.Village.VillageCreate;

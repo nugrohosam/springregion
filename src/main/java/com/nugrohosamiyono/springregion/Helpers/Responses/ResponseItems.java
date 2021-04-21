@@ -1,4 +1,4 @@
-package com.nugrohosamiyono.springregion.Helpers;
+package com.nugrohosamiyono.springregion.Helpers.Responses;
 
 import java.util.List;
 

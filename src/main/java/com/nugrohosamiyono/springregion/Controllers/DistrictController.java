@@ -7,7 +7,7 @@ import javax.validation.Valid;
 import com.nugrohosamiyono.springregion.Applications.DistrictApplication;
 import com.nugrohosamiyono.springregion.Exceptions.ValidationException;
 import com.nugrohosamiyono.springregion.Helpers.Base;
-import com.nugrohosamiyono.springregion.Helpers.Response;
+import com.nugrohosamiyono.springregion.Helpers.Responses.Response;
 import com.nugrohosamiyono.springregion.Models.DistrictModel;
 import com.nugrohosamiyono.springregion.Requests.QueryParams;
 import com.nugrohosamiyono.springregion.Requests.District.DistrictCreate;
@@ -53,9 +53,7 @@ public class DistrictController {
     @GetMapping("/{id}")
     public Response show(@PathVariable Integer id) {
         DistrictModel district = this.districtApplication.detailDistrict(id);
-        if (district == null) {
-            return Base.responseData(null);
-        }
+        
         
         DistrictDetail districtDetail = new DistrictDetail(district);
         return Base.responseData(districtDetail);

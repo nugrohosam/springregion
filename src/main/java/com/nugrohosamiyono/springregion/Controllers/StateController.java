@@ -7,7 +7,7 @@ import javax.validation.Valid;
 import com.nugrohosamiyono.springregion.Applications.StateApplication;
 import com.nugrohosamiyono.springregion.Exceptions.ValidationException;
 import com.nugrohosamiyono.springregion.Helpers.Base;
-import com.nugrohosamiyono.springregion.Helpers.Response;
+import com.nugrohosamiyono.springregion.Helpers.Responses.Response;
 import com.nugrohosamiyono.springregion.Models.StateModel;
 import com.nugrohosamiyono.springregion.Requests.QueryParams;
 import com.nugrohosamiyono.springregion.Requests.State.StateCreate;

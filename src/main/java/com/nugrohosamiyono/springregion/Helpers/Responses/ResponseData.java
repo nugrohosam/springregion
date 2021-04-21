@@ -1,4 +1,4 @@
-package com.nugrohosamiyono.springregion.Helpers;
+package com.nugrohosamiyono.springregion.Helpers.Responses;
 
 public class ResponseData extends Response {    
     public Object data;

@@ -1,5 +1,5 @@
 
-package com.nugrohosamiyono.springregion.Helpers;
+package com.nugrohosamiyono.springregion.Helpers.Responses;
 
 import java.util.ArrayList;
 import java.util.HashMap;

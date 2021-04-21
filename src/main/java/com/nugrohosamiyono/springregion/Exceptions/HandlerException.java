@@ -1,7 +1,7 @@
 package com.nugrohosamiyono.springregion.Exceptions;
 
-import com.nugrohosamiyono.springregion.Helpers.ResponseError;
-import com.nugrohosamiyono.springregion.Helpers.ResponseValidation;
+import com.nugrohosamiyono.springregion.Helpers.Responses.ResponseError;
+import com.nugrohosamiyono.springregion.Helpers.Responses.ResponseValidation;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
