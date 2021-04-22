@@ -11,3 +11,5 @@ rajaogkir.url=https://api.rajaongkir.com
 rajaogkir.level=starter
 logging.level.root=WARN
 logging.level.com.baeldung=TRACE
+authenticate.service.host=grpc.auth.nugrohosamiyono.com
+authenticate.service.port=443

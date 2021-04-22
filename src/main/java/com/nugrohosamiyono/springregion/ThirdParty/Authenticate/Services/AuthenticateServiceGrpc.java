@@ -2,6 +2,7 @@ package com.nugrohosamiyono.springregion.ThirdParty.Authenticate.Services;
 
 import com.nugrohosamiyono.springregion.ThirdParty.Authenticate.Models.AuthInfo;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import io.grpc.ManagedChannel;
@@ -16,12 +17,18 @@ import proto.AuthService.ValidationResponse;
 @Component
 public class AuthenticateServiceGrpc {
 
+    @Value("${authenticate-grpc.service.host}")
+    private String host;
+
+    @Value("${authenticate-grpc.service.port}")
+    private int port;
+
     private AuthInfo authInfo;
 
     public AuthInfo authInfo(String value) throws InterruptedException {
-        authInfo = new AuthInfo();
+        this.authInfo = new AuthInfo();
 
-        ManagedChannel channel = NettyChannelBuilder.forAddress("localhost", 50051).usePlaintext().build();
+        ManagedChannel channel = NettyChannelBuilder.forAddress(this.host, this.port).usePlaintext().build();
         GetAuthServiceGrpc.GetAuthServiceBlockingStub stubAuthService = GetAuthServiceGrpc.newBlockingStub(channel);
 
         GetAuthRequest request = GetAuthRequest.newBuilder().setToken(value).build();
@@ -35,7 +42,7 @@ public class AuthenticateServiceGrpc {
     }
 
     public double authId(String value) {
-        ManagedChannel channel = NettyChannelBuilder.forAddress("localhost", 50051).usePlaintext().build();
+        ManagedChannel channel = NettyChannelBuilder.forAddress(this.host, this.port).usePlaintext().build();
         GetAuthServiceGrpc.GetAuthServiceBlockingStub stubAuthService = GetAuthServiceGrpc.newBlockingStub(channel);
 
         GetAuthRequest request = GetAuthRequest.newBuilder().setToken(value).build();
@@ -46,8 +53,9 @@ public class AuthenticateServiceGrpc {
     }
 
     public boolean validateAuth(String value) {
-        ManagedChannel channel = NettyChannelBuilder.forAddress("localhost", 50051).usePlaintext().build();
-        ValidationServiceGrpc.ValidationServiceBlockingStub stubAuthService = ValidationServiceGrpc.newBlockingStub(channel);
+        ManagedChannel channel = NettyChannelBuilder.forAddress(this.host, this.port).usePlaintext().build();
+        ValidationServiceGrpc.ValidationServiceBlockingStub stubAuthService = ValidationServiceGrpc
+                .newBlockingStub(channel);
 
         GetAuthRequest request = GetAuthRequest.newBuilder().setToken(value).build();
 
