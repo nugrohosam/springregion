@@ -1,8 +1,7 @@
 package com.nugrohosamiyono.springregion.ThirdParty.Authenticate.Services;
 
-import com.nugrohosamiyono.springregion.ThirdParty.Authenticate.Models.AuthInfo;
+import com.nugrohosamiyono.springregion.ThirdParty.Authenticate.Models.AuthInfoGrpc;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import io.grpc.ManagedChannel;
@@ -15,18 +14,12 @@ import proto.AuthService.GetAuthResponse;
 import proto.AuthService.ValidationResponse;
 
 @Component
-public class AuthenticateServiceGrpc {
+public class AuthenticateServiceProto extends BaseServiceGrpc {
 
-    @Value("${authenticate-grpc.service.host}")
-    private String host;
+    private AuthInfoGrpc authInfo;
 
-    @Value("${authenticate-grpc.service.port}")
-    private int port;
-
-    private AuthInfo authInfo;
-
-    public AuthInfo authInfo(String value) throws InterruptedException {
-        this.authInfo = new AuthInfo();
+    public AuthInfoGrpc authInfo(String value) throws InterruptedException {
+        this.authInfo = new AuthInfoGrpc();
 
         ManagedChannel channel = NettyChannelBuilder.forAddress(this.host, this.port).usePlaintext().build();
         GetAuthServiceGrpc.GetAuthServiceBlockingStub stubAuthService = GetAuthServiceGrpc.newBlockingStub(channel);

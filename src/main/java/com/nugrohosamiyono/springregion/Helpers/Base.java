@@ -1,6 +1,17 @@
 package com.nugrohosamiyono.springregion.Helpers;
 
+import java.io.IOException;
+import java.util.Collections;
+import java.util.Enumeration;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequestWrapper;
+import javax.servlet.http.HttpServletResponse;
 
 import com.nugrohosamiyono.springregion.Exceptions.ValidationException;
 import com.nugrohosamiyono.springregion.Helpers.Responses.Response;
@@ -62,5 +73,40 @@ public class Base {
         }
 
         return "(" + String.join(",", dataToString) + ")";
+    }
+
+    public static FilterChain mapQueryParams(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws IOException, ServletException {
+        final Map<String, String[]> formattedParams = new ConcurrentHashMap<>();
+
+        for (String param : request.getParameterMap().keySet()) {
+            String formattedParam = Base.snakeCaseToCamelCase(param);
+            formattedParams.put(formattedParam, request.getParameterValues(param));
+        }
+        
+        HttpServletRequest httpServletRequest = new HttpServletRequestWrapper(request) {
+            @Override
+            public String getParameter(String name) {
+                return formattedParams.containsKey(name) ? formattedParams.get(name)[0] : null;
+            }
+
+            @Override
+            public Enumeration<String> getParameterNames() {
+                return Collections.enumeration(formattedParams.keySet());
+            }
+
+            @Override
+            public String[] getParameterValues(String name) {
+                return formattedParams.get(name);
+            }
+
+            @Override
+            public Map<String, String[]> getParameterMap() {
+                return formattedParams;
+            }
+        };
+
+        filterChain.doFilter(httpServletRequest, response);
+
+        return filterChain;
     }
 }

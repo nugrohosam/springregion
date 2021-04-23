@@ -6,6 +6,8 @@ import javax.validation.Valid;
 
 import com.nugrohosamiyono.springregion.Applications.CityApplication;
 import com.nugrohosamiyono.springregion.Exceptions.ValidationException;
+import com.nugrohosamiyono.springregion.Global.Permissions.CountryPermission;
+import com.nugrohosamiyono.springregion.Global.Roles.AdminRole;
 import com.nugrohosamiyono.springregion.Helpers.Base;
 import com.nugrohosamiyono.springregion.Helpers.Responses.Response;
 import com.nugrohosamiyono.springregion.Helpers.Responses.ResponseMessage;
@@ -19,6 +21,7 @@ import com.nugrohosamiyono.springregion.Responses.City.CityItem;
 
 import org.apache.commons.collections4.IterableUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,6 +40,7 @@ public class CityController {
     private CityApplication cityApplication;
 
     @GetMapping("")
+    @PreAuthorize("hasRole('" + AdminRole.NAME + "') or hasPermission('" + CountryPermission.VIEW + "')")
     public Response index(QueryParams queryParams) {
         Iterable<CityModel> cities;
 
@@ -52,17 +56,19 @@ public class CityController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasRole('" + AdminRole.NAME + "') or hasPermission('" + CountryPermission.VIEW + "')")
     public Response show(@PathVariable Integer id) {
         CityModel city = this.cityApplication.detailCity(id);
         if (city == null) {
             return Base.responseData(null);
         }
-        
+
         CityDetail response = new CityDetail(city);
         return Base.responseData(response);
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('" + AdminRole.NAME + "') or hasPermission('" + CountryPermission.STORE + "')")
     public Response update(@PathVariable Integer id, @Valid @RequestBody CityUpdate cityUpdate, Errors errors)
             throws ValidationException {
         Base.validationCheck(errors);
@@ -72,6 +78,7 @@ public class CityController {
     }
 
     @PostMapping("")
+    @PreAuthorize("hasRole('" + AdminRole.NAME + "') or hasPermission('" + CountryPermission.UPDATE + "')")
     public Response store(@Valid @RequestBody CityCreate cityCreate, Errors errors) throws ValidationException {
         Base.validationCheck(errors);
 
@@ -80,6 +87,7 @@ public class CityController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('" + AdminRole.NAME + "') or hasPermission('" + CountryPermission.DELETE + "')")
     public Response delete(@PathVariable Integer id) {
         this.cityApplication.deleteCityFromAPI(id);
         return (new ResponseMessage("delete of city"));

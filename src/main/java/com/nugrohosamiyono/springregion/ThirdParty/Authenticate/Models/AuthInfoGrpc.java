@@ -1,6 +1,6 @@
 package com.nugrohosamiyono.springregion.ThirdParty.Authenticate.Models;
 
-public class AuthInfo {
+public class AuthInfoGrpc {
     
     private double id;
     private String email;
