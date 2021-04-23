@@ -31,7 +31,7 @@ public class ApplicationConfig {
             protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
                     FilterChain filterChain) throws UnauthorizedException, ServletException, IOException {
 
-                // TODO : This solution sould ne not like this hmmmm ???
+                // TODO : This solution sould not be like this hmmmm ???
                 filterChain = Base.mapQueryParams(request, response, filterChain);
             }
         };
