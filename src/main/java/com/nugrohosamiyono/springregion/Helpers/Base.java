@@ -1,6 +1,7 @@
 package com.nugrohosamiyono.springregion.Helpers;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.List;
@@ -73,6 +74,10 @@ public class Base {
         }
 
         return "(" + String.join(",", dataToString) + ")";
+    }
+
+    public static boolean inArray(String find, Object dataSearch[]){
+        return Arrays.asList(dataSearch).contains(find);
     }
 
     public static FilterChain mapQueryParams(HttpServletRequest request, HttpServletResponse response,

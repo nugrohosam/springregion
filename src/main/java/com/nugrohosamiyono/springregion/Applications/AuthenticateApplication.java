@@ -13,6 +13,6 @@ public class AuthenticateApplication {
     AuthenticateServiceProto authenticateGrpc;
 
     public AuthInfoGrpc authenticateGrpc(String token) throws InterruptedException {
-        return authenticateGrpc.authInfo(token);
+        return this.authenticateGrpc.authInfo(token);
     }
 }

@@ -31,6 +31,7 @@ public class AuthenticateServiceProto extends BaseServiceGrpc {
         this.authInfo.setId(response.getId());
         this.authInfo.setEmail(response.getEmail());
 
+        channel.shutdown();
         return this.authInfo;
     }
 

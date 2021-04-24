@@ -1,10 +1,9 @@
 package com.nugrohosamiyono.springregion.Config;
 
-import java.io.IOException;
-
-import com.nugrohosamiyono.springregion.Exceptions.UnauthorizedException;
 import com.nugrohosamiyono.springregion.Helpers.Base;
 import com.nugrohosamiyono.springregion.Middlewares.AuthorizationMiddleware;
+
+import java.io.IOException;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -29,9 +28,8 @@ public class ApplicationConfig {
 
             @Override
             protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
-                    FilterChain filterChain) throws UnauthorizedException, ServletException, IOException {
-
-                // TODO : This solution sould not be like this hmmmm ???
+                    FilterChain filterChain) throws IOException, ServletException {
+                        
                 filterChain = Base.mapQueryParams(request, response, filterChain);
             }
         };

@@ -11,11 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class LocaleMiddleware {
 
-    public static void checkLang(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) {
+    public void checkLang(HttpServletRequest request, HttpServletResponse response) {
         LocaleInfo.regionCode = request.getHeader("Localization");
-    }
-
-    public static void checkTime(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) {
-
     }
 }
