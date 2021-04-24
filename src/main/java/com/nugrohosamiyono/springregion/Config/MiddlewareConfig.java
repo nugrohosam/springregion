@@ -58,8 +58,6 @@ class Middleware extends HandlerInterceptorAdapter {
 				this.authorizationMiddleware.checkRoles(request, response, route.roles);
 				this.authorizationMiddleware.checkPermission(request, response, route.permission);
 			}
-
-			throw new UnauthorizedException();
 		}
 
 		return true;
