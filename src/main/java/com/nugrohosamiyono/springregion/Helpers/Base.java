@@ -44,8 +44,8 @@ public class Base {
         }
     }
 
-    public static Response responseError(String message) {
-        return (new ResponseError(message));
+    public static Response responseError(String message, Integer statusCode) {
+        return (new ResponseError(message, statusCode));
     }
 
     public static Response responseMessage(String message) {
@@ -75,14 +75,15 @@ public class Base {
         return "(" + String.join(",", dataToString) + ")";
     }
 
-    public static FilterChain mapQueryParams(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws IOException, ServletException {
+    public static FilterChain mapQueryParams(HttpServletRequest request, HttpServletResponse response,
+            FilterChain filterChain) throws IOException, ServletException {
         final Map<String, String[]> formattedParams = new ConcurrentHashMap<>();
 
         for (String param : request.getParameterMap().keySet()) {
             String formattedParam = Base.snakeCaseToCamelCase(param);
             formattedParams.put(formattedParam, request.getParameterValues(param));
         }
-        
+
         HttpServletRequest httpServletRequest = new HttpServletRequestWrapper(request) {
             @Override
             public String getParameter(String name) {

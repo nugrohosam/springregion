@@ -7,6 +7,6 @@ public class ResponseItems extends Response {
 
     public ResponseItems(List<Object> items) {
         this.items = items;
-        this.status_code = 200;
+        this.statusCode =  200;
     }
 }

@@ -5,6 +5,6 @@ public class ResponseData extends Response {
 
     public ResponseData(Object data) {
         this.data =data;
-        this.status_code = 200;
+        this.statusCode =  200;
     }
 }

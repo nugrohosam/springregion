@@ -5,6 +5,6 @@ public class ResponseMessage extends Response {
 
     public ResponseMessage(String message) {
         this.message = message;
-        this.status_code = 200;
+        this.statusCode =  200;
     }
 }

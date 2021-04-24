@@ -16,6 +16,6 @@ public class ResponsePagination extends Response {
         this.total = pagination.total;
         this.perPage = pagination.perPage;
         this.page = pagination.page;
-        this.status_code = 200;
+        this.statusCode =  200;
     }
 }

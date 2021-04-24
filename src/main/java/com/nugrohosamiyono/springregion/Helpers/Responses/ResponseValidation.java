@@ -22,6 +22,6 @@ public class ResponseValidation extends Response {
         }
 
         this.errors = errorValidation;
-        this.status_code = 400;
+        this.statusCode =  400;
     }
 }
