@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.nugrohosamiyono.springregion.Exceptions.UnauthorizedException;
 import com.nugrohosamiyono.springregion.Middlewares.AuthorizationMiddleware;
 import com.nugrohosamiyono.springregion.Middlewares.LocaleMiddleware;
-import com.nugrohosamiyono.springregion.Routes.DataRoute;
-import com.nugrohosamiyono.springregion.Routes.Route;
+import com.nugrohosamiyono.springregion.Routes.Rule;
+import com.nugrohosamiyono.springregion.Routes.RouteRule;
 
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -48,7 +48,7 @@ class Middleware extends HandlerInterceptorAdapter {
 			String actionName = handlerMethod.getMethod().getName();
 
 			String keyRoutesController = controllerName + ":" + actionName;
-			DataRoute route = Route.routes.get(keyRoutesController);
+			Rule route = RouteRule.routes.get(keyRoutesController);
 
 			this.localeMiddleware.checkLang(request, response);
 			this.authorizationMiddleware.checkAuth(request, response, route.auth);
