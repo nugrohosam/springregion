@@ -1,6 +1,10 @@
 package com.nugrohosamiyono.springregion.Helpers.Responses;
 
+import org.springframework.beans.factory.annotation.Value;
+
 public class Response {
     public Integer statusCode;
-    public final String version = "1.0.0";
+
+    @Value("${app.version}")
+    public String version;
 }

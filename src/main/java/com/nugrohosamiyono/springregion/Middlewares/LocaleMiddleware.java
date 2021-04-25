@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class LocaleMiddleware {
-
     public void checkLang(HttpServletRequest request, HttpServletResponse response) {
         LocaleInfo.regionCode = request.getHeader("Localization");
     }
