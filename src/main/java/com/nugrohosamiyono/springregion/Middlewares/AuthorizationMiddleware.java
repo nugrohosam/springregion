@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.nugrohosamiyono.springregion.Applications.AuthenticateApplication;
 import com.nugrohosamiyono.springregion.Exceptions.UnauthorizedException;
 import com.nugrohosamiyono.springregion.Global.AuthInfo;
+import com.nugrohosamiyono.springregion.Helpers.Base;
 import com.nugrohosamiyono.springregion.ThirdParty.Authenticate.Models.AuthInfoGrpc;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,20 +20,22 @@ public class AuthorizationMiddleware {
     @Autowired
     private AuthenticateApplication authenticateApplication;
 
-    public void checkAuth(String type, HttpServletRequest request, HttpServletResponse response)
+    public void checkAuth(HttpServletRequest request, HttpServletResponse response, String auth[])
             throws UnauthorizedException {
+        if (auth == null) {
+            return;
+        }
+
         String authorization = request.getHeader("Authorization");
 
-        if (authorization == null){
+        if (authorization == null) {
             throw new UnauthorizedException();
         }
 
-        switch (type) {
-        case API:
+        if (Base.inArray(API, auth)) {
             this.checkAuthAPI(authorization, request, response);
-            break;
-        default:
-            // try another auth here
+        } else {
+            throw new UnauthorizedException();
         }
     }
 

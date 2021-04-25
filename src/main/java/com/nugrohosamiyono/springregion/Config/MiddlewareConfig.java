@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.nugrohosamiyono.springregion.Exceptions.UnauthorizedException;
-import com.nugrohosamiyono.springregion.Helpers.Base;
 import com.nugrohosamiyono.springregion.Middlewares.AuthorizationMiddleware;
 import com.nugrohosamiyono.springregion.Middlewares.LocaleMiddleware;
 import com.nugrohosamiyono.springregion.Routes.DataRoute;
@@ -52,12 +51,9 @@ class Middleware extends HandlerInterceptorAdapter {
 			DataRoute route = Route.routes.get(keyRoutesController);
 
 			this.localeMiddleware.checkLang(request, response);
-
-			if (Base.inArray(AuthorizationMiddleware.API, route.auth)) {
-				this.authorizationMiddleware.checkAuth(AuthorizationMiddleware.API, request, response);
-				this.authorizationMiddleware.checkRoles(request, response, route.roles);
-				this.authorizationMiddleware.checkPermission(request, response, route.permission);
-			}
+			this.authorizationMiddleware.checkAuth(request, response, route.auth);
+			this.authorizationMiddleware.checkRoles(request, response, route.roles);
+			this.authorizationMiddleware.checkPermission(request, response, route.permission);
 		}
 
 		return true;
