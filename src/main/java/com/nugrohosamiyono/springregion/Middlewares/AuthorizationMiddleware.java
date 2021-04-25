@@ -36,24 +36,6 @@ public class AuthorizationMiddleware {
         }
     }
 
-    private void checkAuthAPI(String authorization, HttpServletRequest request, HttpServletResponse response)
-            throws UnauthorizedException {
-
-        try {
-            AuthInfoGrpc authInfoGrpc = this.authenticateApplication.authenticateGrpc(authorization);
-
-            if (authInfoGrpc.getId() == 0) {
-                throw new UnauthorizedException();
-            }
-
-            AuthInfo.email = authInfoGrpc.getEmail();
-            AuthInfo.id = (int) authInfoGrpc.getId();
-
-        } catch (InterruptedException exception) {
-            throw new UnauthorizedException();
-        }
-    }
-
     public void checkRoles(HttpServletRequest request, HttpServletResponse response, String roles[])
             throws UnauthorizedException {
         if (roles == null) {
@@ -72,5 +54,23 @@ public class AuthorizationMiddleware {
 
         String permission = request.getHeader("Permission");
         throw new UnauthorizedException();
+    }
+
+    private void checkAuthAPI(String authorization, HttpServletRequest request, HttpServletResponse response)
+            throws UnauthorizedException {
+
+        try {
+            AuthInfoGrpc authInfoGrpc = this.authenticateApplication.authenticateGrpc(authorization);
+
+            if (authInfoGrpc.getId() == 0) {
+                throw new UnauthorizedException();
+            }
+
+            AuthInfo.email = authInfoGrpc.getEmail();
+            AuthInfo.id = (int) authInfoGrpc.getId();
+
+        } catch (InterruptedException exception) {
+            throw new UnauthorizedException();
+        }
     }
 }
