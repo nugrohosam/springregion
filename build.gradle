@@ -13,7 +13,9 @@ repositories {
 }
 
 dependencies {
+	implementation 'org.springframework.kafka:spring-kafka'
     implementation 'com.google.protobuf:protobuf-java:3.15.3'
+	implementation 'org.springframework.boot:spring-boot-starter-amqp'
 	implementation 'io.grpc:grpc-netty:1.37.0'
 	implementation 'io.grpc:grpc-protobuf:1.37.0'
 	implementation 'io.grpc:grpc-stub:1.37.0'

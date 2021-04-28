@@ -34,7 +34,9 @@ public class AuthorizationMiddleware {
 
         if (Base.inArray(API, auth)) {
             this.checkAuthAPI(authorization, request, response);
-        } else {
+        }
+
+        if (AuthInfo.id == 0){
             throw new UnauthorizedException();
         }
     }
