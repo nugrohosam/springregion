@@ -45,7 +45,6 @@ class Middleware extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws UnauthorizedException {
 
-
 		if (handler instanceof HandlerMethod) {
 			HandlerMethod handlerMethod = (HandlerMethod) handler;
 			String controllerName = handlerMethod.getBeanType().getCanonicalName();
