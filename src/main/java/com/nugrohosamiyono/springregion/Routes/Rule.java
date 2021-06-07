@@ -10,6 +10,7 @@ public class Rule {
         this.auth = auth;
     }
 
+    
     public Rule(String auth[], String roles[], String permissions[]) {
         this.auth = auth;
         this.roles = roles;
