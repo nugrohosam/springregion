@@ -48,6 +48,12 @@ public class AuthorizationMiddleware {
         }
 
         String role = request.getHeader("Role");
+        if (role.isEmpty()) {
+            throw new UnauthorizedException();
+        } else {
+            return;
+        }
+
         throw new UnauthorizedException();
     }
 
